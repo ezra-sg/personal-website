@@ -1,4 +1,20 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
+@theme {
+    --font-header: 'Young Serif', serif;
+
+    --font-serif: 'Georgia', 'serif';
+    --font-sans: 'Nunito Sans', sans-serif;
+
+    --animate-fade-in: fade-in 5s 1;
+    --animate-fade-in-fast: fade-in 0.3s 1;
+
+    @keyframes fade-in{
+        0%: {
+            opacity: '0'
+        }
+        100%: {
+            opacity: '1'
+        }
+    }
+}

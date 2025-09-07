@@ -85,9 +85,6 @@ export default function Modal({ children, description, title, subtitle, trigger,
                 firstFocusableInDialog.focus();
             } else if (document.activeElement === firstFocusableInDialog) {
                 lastFocusableInDialog.focus();
-                // ideally, here we would want the focus to cycle onto the browser UI elements rather than trapping focus in the dialog
-                // however, for some reason, the method below doesn't work for achieving this, and it seems there is no way to do this
-                // so on shift+tab from the first focusable element in the dialog, we just focus the last focusable element in the dialog
             }
 
             event.preventDefault();
@@ -174,19 +171,11 @@ export default function Modal({ children, description, title, subtitle, trigger,
             {trigger}
         </div>
 
-        {/*
-            below, `modalIsVisible ? 'flex' : ''` is required because the browser's default showing and hiding mechanism for <dialog>s
-            depends on `display: none`. Having `display: flex` on the closed dialog causes it to be always visible, regardless of whether it is "open"
-        */}
         <dialog
             ref={dialogRef}
             aria-modal="true"
             className={`${modalIsVisible ? 'flex' : ''} ${dialogDimensionalClasses} h-max fixed top-0 right-0 bottom-0 left-0 items-center justify-center overflow-hidden bg-transparent backdrop:bg-black backdrop:opacity-90`}
         >
-            {/*
-                There is some weird styling behavior going on with the dialog element.
-                Duplicating dimensional styling on the dialog and inner container seems to be the only way to get it to work as expected
-            */}
             <div className={`relative ${dialogDimensionalClasses} rounded-sm overflow-hidden flex h-max`}>
                 <div ref={dialogInnerRef} className="relative w-full bg-white dark:bg-stone-950 dark:text-amber-50">
                     <header className="absolute top-0 left-0 right-0 shadow-sm flex justify-between items-center bg-amber-50 dark:bg-stone-950">

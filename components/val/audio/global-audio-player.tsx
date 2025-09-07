@@ -12,8 +12,9 @@ import {
     MdRestartAlt,
 } from 'react-icons/md';
 
-import './global-audio-player.scss';
+import audioPlayerStyles from './global-audio-player.module.scss';
 
+import cn from '@/utils/cn';
 import { useI18n } from '@/hooks/useI18n';
 import { AudioStatus, useAudioContext } from '@/hooks/useAudioContext';
 import { prettyPrintTimestamp } from '@/utils/text-utils';
@@ -23,6 +24,23 @@ export type AudioPlayerProps = {
     modalMode: boolean; // determines whether the component uses the <audio> element from the context or its own
     manualStopHandler?: () => void;
 };
+
+const trackStyles = 'bg-stone-500 dark:bg-white h-[2px] cursor-pointer'.split(' ');
+const thumbStyles = 'bg-amber-900 dark:bg-orange-300 shadow-md w-[6px] h-[15px] rounded-xs mt-[-7px] cursor-pointer'.split(' ');
+const scrubberStyles = cn(
+    'min-w-0 appearance-none',
+    '[&::-moz-range-thumb]:appearance-none',
+    '[&::-webkit-slider-thumb]:appearance-none',
+    '[&::-webkit-slider-thumb]:[-webkit-appearance: none]',
+    ...trackStyles.map(clss => `[&::-webkit-slider-runnable-track]:${clss}`),
+    ...trackStyles.map(clss => `[&::-moz-range-track]:${clss}`),
+    'dark:[&::-webkit-slider-runnable-track]:bg-white',
+    'dark:[&::-moz-range-track]:bg-white',
+    ...thumbStyles.map(clss => `[&::-webkit-slider-thumb]:${clss}`),
+    ...thumbStyles.map(clss => `[&::-moz-range-thumb]:${clss}`),
+    'dark:[&::-webkit-slider-thumb]:bg-orange-300',
+    'dark:[&::-moz-range-thumb]:bg-orange-300',
+);
 
 export const playbackSpeedOptions = [0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75];
 
@@ -223,7 +241,7 @@ export default function GlobalAudioPlayer({ labelledBy, modalMode, manualStopHan
                 step="0.1"
                 defaultValue={0}
                 aria-label={`${t('audio.audio_scrubber_aria')} ${currentAudioData.title}`}
-                className="c-audio-player__scrubber"
+                className={scrubberStyles}
             />
 
             {/* total audio time */}

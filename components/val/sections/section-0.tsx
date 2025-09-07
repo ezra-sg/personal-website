@@ -11,9 +11,11 @@ export default function SectionZero() {
     return (
         <div className="w-full bg-white dark:bg-stone-900 p-4 pt-12">
             <div className="m-auto max-w-[1000px]">
-                <ReactMarkdown className={`${firstParagraphClasses} ${paragraphClasses}`}>
-                    {t('val.section_0.paragraph_1_md')}
-                </ReactMarkdown>
+                <div className={`${firstParagraphClasses} ${paragraphClasses}`}>
+                    <ReactMarkdown>
+                        {t('val.section_0.paragraph_1_md')}
+                    </ReactMarkdown>
+                </div>
             </div>
         </div>
     );

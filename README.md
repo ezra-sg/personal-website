@@ -5,6 +5,7 @@ Welcome to Ezra Sowden-Guzman's portfolio website repository.
 To run the development server:
 
 ```bash
+bun install # or npm, or pnpm, etc
 bun dev
 ```
 
