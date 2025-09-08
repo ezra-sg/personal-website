@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`Modal should render properly 1`] = `
 <div>
@@ -16,7 +16,7 @@ exports[`Modal should render properly 1`] = `
   </div>
   <dialog
     aria-modal="true"
-    class=" w-[90vw] max-w-[1000px] min-h-[40vh] max-h-[80vh] md:max-h-[600px] h-max fixed top-0 right-0 bottom-0 left-0 items-center justify-center overflow-hidden bg-transparent backdrop:bg-black backdrop:opacity-90"
+    class=" w-[90vw] max-w-[1000px] min-h-[40vh] max-h-[80vh] md:max-h-[600px] m-auto h-max fixed top-0 right-0 bottom-0 left-0 items-center justify-center overflow-hidden bg-transparent backdrop:bg-black backdrop:opacity-90"
   >
     <div
       class="relative w-[90vw] max-w-[1000px] min-h-[40vh] max-h-[80vh] md:max-h-[600px] rounded-sm overflow-hidden flex h-max"
@@ -37,7 +37,9 @@ exports[`Modal should render properly 1`] = `
             </h1>
             <p
               class="text-xs italic"
-            />
+            >
+              subtitle text
+            </p>
           </div>
           <button
             aria-label="modal.close_modal_label title text"

@@ -66,7 +66,7 @@ describe('<Starfield />', () => {
         expect(fpsMeter).not.toBeInTheDocument();
 
         // there should be no redraw calls after stars have been drawn intially
-        expect(rafSpy).not.toBeCalled();
+        expect(rafSpy).not.toHaveBeenCalled();
     });
 })
 

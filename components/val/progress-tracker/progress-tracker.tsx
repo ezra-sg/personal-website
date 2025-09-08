@@ -1,11 +1,10 @@
 import { RefObject, useEffect, useRef, useState } from 'react';
 
-import './progress-tracker.scss';
-
 import throttle from '@/utils/throttle';
 import { useI18n } from '@/hooks/useI18n';
 
 import LanguageSwitcher from '@/components/val/language-switcher/language-switcher';
+import cn from '@/utils/cn';
 
 interface ProgressTrackerProps {
     sectionOneRef: RefObject<HTMLElement>;
@@ -30,6 +29,24 @@ export default function ProgressTracker({
     const lastScrollTop = useRef(0);
 
     const { t } = useI18n();
+
+    const progressClasses = cn(
+        '--progress-percent:0%',
+        'fixed right-0 bottom-0 left-0 h-3 items-center bg-amber-50 transition-all duration-[0.2s] dark:bg-stone-950 not-[hidden]:flex',
+        expanded && 'h-12 lg:h-10',
+        'before:block',
+        'before:absolute',
+        'before:-left-full',
+        'before:h-full',
+        'before:w-full',
+        'before:bg-amber-900',
+        'before:z-0',
+        'before:dark:bg-orange-300',
+        'before:content-[\'\']',
+        'before:translate-x-(--progress-percent)',
+        'before:duration-[0.3s]',
+        'before:transition-all',
+    );
 
     const buttons = [
         {
@@ -154,7 +171,7 @@ export default function ProgressTracker({
     return (
         <div
             ref={rootElementRef}
-            className={`c-progress-tracker ${expanded ? 'c-progress-tracker--expanded' : ''}`}
+            className={progressClasses}
             role="progressbar"
             aria-valuemin={0}
             aria-valuemax={100}

@@ -1,6 +1,6 @@
 import { renderHook } from '@testing-library/react';
 import usePrefersDarkMode from '@/hooks/usePrefersDarkMode';
-import { act } from 'react-dom/test-utils';
+import { act } from 'react';
 
 describe('usePrefersDarkMode', () => {
     let savedMatchMedia: ((query: string) => MediaQueryList);

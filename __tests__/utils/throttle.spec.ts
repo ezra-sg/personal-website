@@ -13,6 +13,6 @@ describe('throttle', () => {
 
         jest.advanceTimersByTime(1000);
 
-        expect(fn).toBeCalledTimes(2);
+        expect(fn).toHaveBeenCalledTimes(2);
     });
 });

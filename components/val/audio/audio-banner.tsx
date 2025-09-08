@@ -30,7 +30,7 @@ export default function AudioBanner() {
 
     const stopPlaybackHandler = useCallback(() => {
         setBannerState(BannerState.hidden);
-    }, []);
+    }, [setBannerState]);
 
     const modalTrigger = useMemo(() => (
         <div

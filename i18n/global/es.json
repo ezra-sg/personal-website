@@ -16,6 +16,7 @@
         "play_audio_aria": "Inicie la reproducción de audio para:",
         "restart_audio_aria": "Reinicie la reproducción de audio para:",
         "stop_audio_aria": "Detener la reproducción de audio para:",
+        "snippet_prefix": "Audio: ",
         "view_transcript_md": "Ver transcripción"
     },
     "global": {

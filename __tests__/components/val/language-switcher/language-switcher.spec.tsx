@@ -1,5 +1,5 @@
 import { RenderResult, fireEvent } from '@testing-library/react';
-import { act } from 'react-dom/test-utils';
+import { act } from 'react';
 
 import LanguageSwitcher from '@/components/val/language-switcher/language-switcher';
 import { renderWithLanguage } from '@/__tests__/testing-helpers';

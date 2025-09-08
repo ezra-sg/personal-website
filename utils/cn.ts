@@ -1,7 +1,6 @@
 
 /**
  * A utility for succinctly composing class names for DOM elements.
- * Implementation comes from Lumo, tweaked by me for better typing and brevity.
  *
  * @param inputs the className inputs to evaluate for concatenation
  * @returns a string of class names to apply to an element

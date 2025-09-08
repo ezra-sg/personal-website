@@ -17,9 +17,14 @@ type AudioSnippetProps = {
     transcript: string;
 };
 
+enum IconName  {
+    play = 'play',
+    pause = 'pause',
+    restart = 'restart',
+}
+
 export default function AudioSnippet({ src, title, transcript }: AudioSnippetProps) {
-    const [icon, setIcon] = useState<'play' | 'pause' | 'restart'>('play');
-    const [completed, setCompleted] = useState(false);
+    const [icon, setIcon] = useState<IconName>(IconName.play);
 
     const snippetId = title.replaceAll(' ', '-').toLowerCase();
 
@@ -50,7 +55,6 @@ export default function AudioSnippet({ src, title, transcript }: AudioSnippetPro
 
         if (status === playing && currentAudioData.snippetId === snippetId) {
             pauseAudio();
-            setCompleted(false);
         } else if ([paused, complete, stopped].includes(status) || currentAudioData.snippetId !== snippetId) {
             playAudio(snippetId, src, title, transcript);
         }
@@ -66,14 +70,13 @@ export default function AudioSnippet({ src, title, transcript }: AudioSnippetPro
             } = AudioStatus;
 
             if (status === playing) {
-                setIcon('pause');
+                setIcon(IconName.pause);
             } else if (status === paused) {
-                setIcon('play');
-            } else if (status === complete || completed) {
-                setCompleted(true);
-                setIcon('restart');
+                setIcon(IconName.play);
+            } else if (status === complete) {
+                setIcon(IconName.restart);
             } else if (status === stopped) {
-                setIcon('play');
+                setIcon(IconName.play);
             }
         };
 
@@ -82,12 +85,12 @@ export default function AudioSnippet({ src, title, transcript }: AudioSnippetPro
         return () => {
             unsubscribe(snippetId, handler);
         };
-    }, [title, subscribe, unsubscribe, snippetId, completed]);
+    }, [title, subscribe, unsubscribe, snippetId]);
 
     return (
         <div className="flex flex-col items-center justify-center">
             <h3 className="font-header dark:text-white">
-                Audio: {title}
+                {t('audio.snippet_prefix')}{title}
             </h3>
 
             <div className="flex gap-2 items-center">
@@ -96,9 +99,9 @@ export default function AudioSnippet({ src, title, transcript }: AudioSnippetPro
                     onClick={handleButtonClick}
                     aria-label={playButtonAriaLabel}
                 >
-                    {icon === 'play' && <MdPlayCircleOutline className="h-12 w-12" aria-hidden={true} />}
-                    {icon === 'pause' && <MdOutlinePauseCircleOutline className="h-12 w-12" aria-hidden={true} />}
-                    {icon === 'restart' && <MdRestartAlt className="h-12 w-12" aria-hidden={true} />}
+                    {icon === IconName.play && <MdPlayCircleOutline className="h-12 w-12" aria-hidden={true} />}
+                    {icon === IconName.pause && <MdOutlinePauseCircleOutline className="h-12 w-12" aria-hidden={true} />}
+                    {icon === IconName.restart && <MdRestartAlt className="h-12 w-12" aria-hidden={true} />}
                 </button>
 
                 <AudioSpectrograph snippetId={snippetId} />

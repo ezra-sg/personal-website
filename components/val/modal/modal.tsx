@@ -174,7 +174,7 @@ export default function Modal({ children, description, title, subtitle, trigger,
         <dialog
             ref={dialogRef}
             aria-modal="true"
-            className={`${modalIsVisible ? 'flex' : ''} ${dialogDimensionalClasses} h-max fixed top-0 right-0 bottom-0 left-0 items-center justify-center overflow-hidden bg-transparent backdrop:bg-black backdrop:opacity-90`}
+            className={`${modalIsVisible ? 'flex' : ''} ${dialogDimensionalClasses} m-auto h-max fixed top-0 right-0 bottom-0 left-0 items-center justify-center overflow-hidden bg-transparent backdrop:bg-black backdrop:opacity-90`}
         >
             <div className={`relative ${dialogDimensionalClasses} rounded-sm overflow-hidden flex h-max`}>
                 <div ref={dialogInnerRef} className="relative w-full bg-white dark:bg-stone-950 dark:text-amber-50">

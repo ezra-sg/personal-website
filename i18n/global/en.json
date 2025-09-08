@@ -16,6 +16,7 @@
         "play_audio_aria": "Begin audio playback for:",
         "restart_audio_aria": "Restart audio playback for:",
         "stop_audio_aria": "Stop audio playback for:",
+        "snippet_prefix": "Audio: ",
         "view_transcript_md": "View transcript"
     },
     "global": {

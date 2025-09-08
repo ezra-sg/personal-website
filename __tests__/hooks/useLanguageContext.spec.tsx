@@ -9,7 +9,7 @@ describe('useLanguageContext', () => {
         const originalError = console.error;
         console.error = jest.fn();
 
-        expect(() => renderHook(() => useLanguageContext())).toThrowError();
+        expect(() => renderHook(() => useLanguageContext())).toThrow();
 
         // Restore original console.error
         console.error = originalError;
@@ -18,7 +18,7 @@ describe('useLanguageContext', () => {
     it('should return the context language', () => {
         const { result } = renderHook(() => useLanguageContext(), {
             wrapper: ({ children }) => (
-                <LanguageContext.Provider value={{ language: SupportedLanguages.english }}>
+                <LanguageContext.Provider value={{ language: SupportedLanguages.english, translations: {} }}>
                     {children}
                 </LanguageContext.Provider>
             ),

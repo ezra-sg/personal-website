@@ -9,10 +9,10 @@ describe('debounce', () => {
         debouncedFn();
         debouncedFn();
 
-        expect(fn).not.toBeCalled();
+        expect(fn).not.toHaveBeenCalled();
 
         jest.advanceTimersByTime(1000);
 
-        expect(fn).toBeCalledTimes(1);
+        expect(fn).toHaveBeenCalledTimes(1);
     });
 });

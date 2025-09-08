@@ -15,6 +15,7 @@ describe('Modal', () => {
         <Modal
             description="description text"
             title="title text"
+            subtitle="subtitle text"
             trigger={<button>trigger text</button>}
         >
             <div>children text</div>
@@ -52,6 +53,10 @@ describe('Modal', () => {
 
         const triggerElement = result.queryByTestId('modal-trigger');
         expect(triggerElement).toBeInTheDocument();
+
+        // another mysterious case of listeners being added unrelated to the component code-- in this case, it's "mouseover" and "mouseout"
+        // so we need to reset the mocks again
+        (document.addEventListener as jest.Mock).mockReset();
 
         // open the modal
         // note that in the browser environment, the HTMLElementDialog.prototype.showModal() method

@@ -1,6 +1,6 @@
 import { renderHook } from '@testing-library/react';
 import usePrefersReducedMotion from '@/hooks/usePrefersReducedMotion';
-import { act } from 'react-dom/test-utils';
+import { act } from 'react';
 
 describe('usePrefersReducedMotion', () => {
     let savedMatchMedia: ((query: string) => MediaQueryList);

@@ -232,7 +232,7 @@ export default function GlobalAudioPlayer({ labelledBy, modalMode, manualStopHan
                     setShowRestartIcon(false);
                 }}
                 onKeyDown={(event) => {
-                    if([' ', 'Enter'].includes(event.key)) {
+                    if(['Space', 'Enter'].includes(event.key)) {
                         event.preventDefault();
                         setAudioStatus(AudioStatus.paused, currentAudioData.snippetId);
                         setShowRestartIcon(false);

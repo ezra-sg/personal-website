@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`AudioPlayer should change states depending on whether the audio is playing, paused, or finished 1`] = `
 <div>
@@ -23,7 +23,7 @@ exports[`AudioPlayer should change states depending on whether the audio is play
     </code>
     <input
       aria-label="audio.audio_scrubber_aria null"
-      class="c-audio-player__scrubber"
+      class="min-w-0 appearance-none [&::-webkit-slider-runnable-track]:bg-stone-500 [&::-webkit-slider-runnable-track]:h-[2px] [&::-webkit-slider-runnable-track]:cursor-pointer dark:[&::-webkit-slider-runnable-track]:bg-white [&::-moz-range-track]:bg-stone-500 [&::-moz-range-track]:h-[2px] [&::-moz-range-track]:cursor-pointer dark:[&::-moz-range-track]:bg-white [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:[-webkit-appearance: none] [&::-webkit-slider-thumb]:bg-amber-900 [&::-webkit-slider-thumb]:w-[6px] [&::-webkit-slider-thumb]:h-[15px] [&::-webkit-slider-thumb]:shadow-md [&::-webkit-slider-thumb]:rounded-xs [&::-webkit-slider-thumb]:mt-[-7px] [&::-webkit-slider-thumb]:cursor-pointer dark:[&::-webkit-slider-thumb]:bg-orange-300 [&::-moz-range-thumb]:appearance-none [&::-moz-range-thumb]:bg-amber-900 [&::-moz-range-thumb]:w-[6px] [&::-moz-range-thumb]:h-[15px] [&::-moz-range-thumb]:shadow-md [&::-moz-range-thumb]:rounded-xs [&::-moz-range-thumb]:mt-[-7px] [&::-moz-range-thumb]:cursor-pointer dark:[&::-moz-range-thumb]:bg-orange-300"
       min="0"
       step="0.1"
       type="range"
@@ -171,7 +171,7 @@ exports[`AudioPlayer should change states depending on whether the audio is play
     </code>
     <input
       aria-label="audio.audio_scrubber_aria null"
-      class="c-audio-player__scrubber"
+      class="min-w-0 appearance-none [&::-webkit-slider-runnable-track]:bg-stone-500 [&::-webkit-slider-runnable-track]:h-[2px] [&::-webkit-slider-runnable-track]:cursor-pointer dark:[&::-webkit-slider-runnable-track]:bg-white [&::-moz-range-track]:bg-stone-500 [&::-moz-range-track]:h-[2px] [&::-moz-range-track]:cursor-pointer dark:[&::-moz-range-track]:bg-white [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:[-webkit-appearance: none] [&::-webkit-slider-thumb]:bg-amber-900 [&::-webkit-slider-thumb]:w-[6px] [&::-webkit-slider-thumb]:h-[15px] [&::-webkit-slider-thumb]:shadow-md [&::-webkit-slider-thumb]:rounded-xs [&::-webkit-slider-thumb]:mt-[-7px] [&::-webkit-slider-thumb]:cursor-pointer dark:[&::-webkit-slider-thumb]:bg-orange-300 [&::-moz-range-thumb]:appearance-none [&::-moz-range-thumb]:bg-amber-900 [&::-moz-range-thumb]:w-[6px] [&::-moz-range-thumb]:h-[15px] [&::-moz-range-thumb]:shadow-md [&::-moz-range-thumb]:rounded-xs [&::-moz-range-thumb]:mt-[-7px] [&::-moz-range-thumb]:cursor-pointer dark:[&::-moz-range-thumb]:bg-orange-300"
       min="0"
       step="0.1"
       type="range"
@@ -319,7 +319,7 @@ exports[`AudioPlayer should change states depending on whether the audio is play
     </code>
     <input
       aria-label="audio.audio_scrubber_aria null"
-      class="c-audio-player__scrubber"
+      class="min-w-0 appearance-none [&::-webkit-slider-runnable-track]:bg-stone-500 [&::-webkit-slider-runnable-track]:h-[2px] [&::-webkit-slider-runnable-track]:cursor-pointer dark:[&::-webkit-slider-runnable-track]:bg-white [&::-moz-range-track]:bg-stone-500 [&::-moz-range-track]:h-[2px] [&::-moz-range-track]:cursor-pointer dark:[&::-moz-range-track]:bg-white [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:[-webkit-appearance: none] [&::-webkit-slider-thumb]:bg-amber-900 [&::-webkit-slider-thumb]:w-[6px] [&::-webkit-slider-thumb]:h-[15px] [&::-webkit-slider-thumb]:shadow-md [&::-webkit-slider-thumb]:rounded-xs [&::-webkit-slider-thumb]:mt-[-7px] [&::-webkit-slider-thumb]:cursor-pointer dark:[&::-webkit-slider-thumb]:bg-orange-300 [&::-moz-range-thumb]:appearance-none [&::-moz-range-thumb]:bg-amber-900 [&::-moz-range-thumb]:w-[6px] [&::-moz-range-thumb]:h-[15px] [&::-moz-range-thumb]:shadow-md [&::-moz-range-thumb]:rounded-xs [&::-moz-range-thumb]:mt-[-7px] [&::-moz-range-thumb]:cursor-pointer dark:[&::-moz-range-thumb]:bg-orange-300"
       min="0"
       step="0.1"
       type="range"
