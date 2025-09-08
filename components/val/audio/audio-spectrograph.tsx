@@ -10,7 +10,7 @@ export function AudioSpectrograph({ snippetId }: { snippetId: string }) {
     const color = useRef(ORANGE_300);
     const isPlaying = useRef(false);
     const animationId = useRef<null | number>(null);
-    const spectrogramElementRef = useRef<HTMLCanvasElement | null>(null);
+    const spectrographElementRef = useRef<HTMLCanvasElement | null>(null);
     const drawFunctionRef = useRef<null | ((analyzer: AnalyserNode, dataArray: Uint8Array) => void)>(null);
 
     const prefersDarkMode = usePrefersDarkMode();
@@ -40,7 +40,7 @@ export function AudioSpectrograph({ snippetId }: { snippetId: string }) {
     }
 
     const draw = useCallback((analyzer: AnalyserNode, dataArray: Uint8Array) => {
-        const canvas = spectrogramElementRef.current;
+        const canvas = spectrographElementRef.current;
         const canvasCtx = canvas?.getContext('2d');
 
         if (!canvas || !canvasCtx) {
@@ -79,7 +79,7 @@ export function AudioSpectrograph({ snippetId }: { snippetId: string }) {
     drawFunctionRef.current = draw;
 
     useEffect(() => {
-        drawLineOnCanvas(spectrogramElementRef.current!);
+        drawLineOnCanvas(spectrographElementRef.current!);
     }, []);
 
     useEffect(() => {
@@ -92,7 +92,7 @@ export function AudioSpectrograph({ snippetId }: { snippetId: string }) {
         const handler = (status: AudioStatus) => {
             isPlaying.current = status === playing;
 
-            if (status === playing && audioElement && audioAnalyser && spectrogramElementRef.current) {
+            if (status === playing && audioElement && audioAnalyser && spectrographElementRef.current) {
                 const bufferLength = audioAnalyser.frequencyBinCount;
                 const dataArray = new Uint8Array(bufferLength);
                 drawFunctionRef.current?.(audioAnalyser, dataArray);
@@ -106,5 +106,5 @@ export function AudioSpectrograph({ snippetId }: { snippetId: string }) {
         };
     }, [audioElement, audioAnalyser, subscribe, unsubscribe, snippetId]);
 
-    return <canvas ref={spectrogramElementRef} className="w-40 h-14"></canvas>;
+    return <canvas ref={spectrographElementRef} className="w-40 h-14"></canvas>;
 }

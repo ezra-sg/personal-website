@@ -9,7 +9,7 @@ import {
 
 import { useI18n } from '@/hooks/useI18n';
 
-import { AudioSpectrograph } from '@/components/val/audio/audio-spectrogram';
+import { AudioSpectrograph } from '@/components/val/audio/audio-spectrograph';
 
 type AudioSnippetProps = {
     src: string;
