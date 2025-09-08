@@ -12,8 +12,6 @@ import {
     MdRestartAlt,
 } from 'react-icons/md';
 
-import audioPlayerStyles from './global-audio-player.module.scss';
-
 import cn from '@/utils/cn';
 import { useI18n } from '@/hooks/useI18n';
 import { AudioStatus, useAudioContext } from '@/hooks/useAudioContext';
@@ -25,20 +23,44 @@ export type AudioPlayerProps = {
     manualStopHandler?: () => void;
 };
 
-const trackStyles = 'bg-stone-500 dark:bg-white h-[2px] cursor-pointer'.split(' ');
-const thumbStyles = 'bg-amber-900 dark:bg-orange-300 shadow-md w-[6px] h-[15px] rounded-xs mt-[-7px] cursor-pointer'.split(' ');
-const scrubberStyles = cn(
+// tailwind only detects classes if they are stated in source code; instead of generating classes with
+// the vendor prefixes programmatically, they must be explicitly listed here
+const scrubberClasses = cn(
     'min-w-0 appearance-none',
-    '[&::-moz-range-thumb]:appearance-none',
+
+    // track styles - webkit
+    '[&::-webkit-slider-runnable-track]:bg-stone-500',
+    '[&::-webkit-slider-runnable-track]:h-[2px]',
+    '[&::-webkit-slider-runnable-track]:cursor-pointer',
+    'dark:[&::-webkit-slider-runnable-track]:bg-white',
+
+    // track styles - firefox
+    '[&::-moz-range-track]:bg-stone-500',
+    '[&::-moz-range-track]:h-[2px]',
+    '[&::-moz-range-track]:cursor-pointer',
+    'dark:[&::-moz-range-track]:bg-white',
+
+    // thumb styles - webkit
     '[&::-webkit-slider-thumb]:appearance-none',
     '[&::-webkit-slider-thumb]:[-webkit-appearance: none]',
-    ...trackStyles.map(clss => `[&::-webkit-slider-runnable-track]:${clss}`),
-    ...trackStyles.map(clss => `[&::-moz-range-track]:${clss}`),
-    'dark:[&::-webkit-slider-runnable-track]:bg-white',
-    'dark:[&::-moz-range-track]:bg-white',
-    ...thumbStyles.map(clss => `[&::-webkit-slider-thumb]:${clss}`),
-    ...thumbStyles.map(clss => `[&::-moz-range-thumb]:${clss}`),
+    '[&::-webkit-slider-thumb]:bg-amber-900',
+    '[&::-webkit-slider-thumb]:w-[6px]',
+    '[&::-webkit-slider-thumb]:h-[15px]',
+    '[&::-webkit-slider-thumb]:shadow-md',
+    '[&::-webkit-slider-thumb]:rounded-xs',
+    '[&::-webkit-slider-thumb]:mt-[-7px]',
+    '[&::-webkit-slider-thumb]:cursor-pointer',
     'dark:[&::-webkit-slider-thumb]:bg-orange-300',
+
+    // thumb styles - firefox
+    '[&::-moz-range-thumb]:appearance-none',
+    '[&::-moz-range-thumb]:bg-amber-900',
+    '[&::-moz-range-thumb]:w-[6px]',
+    '[&::-moz-range-thumb]:h-[15px]',
+    '[&::-moz-range-thumb]:shadow-md',
+    '[&::-moz-range-thumb]:rounded-xs',
+    '[&::-moz-range-thumb]:mt-[-7px]',
+    '[&::-moz-range-thumb]:cursor-pointer',
     'dark:[&::-moz-range-thumb]:bg-orange-300',
 );
 
@@ -241,7 +263,7 @@ export default function GlobalAudioPlayer({ labelledBy, modalMode, manualStopHan
                 step="0.1"
                 defaultValue={0}
                 aria-label={`${t('audio.audio_scrubber_aria')} ${currentAudioData.title}`}
-                className={scrubberStyles}
+                className={scrubberClasses}
             />
 
             {/* total audio time */}

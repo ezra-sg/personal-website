@@ -1,38 +1,22 @@
-import { Suspense, lazy, useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { MdReadMore } from 'react-icons/md';
 
 import { useI18n } from '@/hooks/useI18n';
 import { AudioStatus, useAudioContext } from '@/hooks/useAudioContext';
 import useScrollDirection, { ScrollDirection } from '@/hooks/useScrollDirection';
-
-import throttle from '@/utils/throttle';
+import cn from '@/utils/cn';
 
 import GlobalAudioPlayer from '@/components/val/audio/global-audio-player';
 import Modal from '@/components/val/modal/modal';
 
-import './audio-banner.scss';
-import cn from '@/utils/cn';
-
-// const Modal = lazy(() => import('@/components/val/modal/modal'));
-
 enum BannerState {
     visible = 'visible',
-    markedForRemoval = 'marked-for-removal',
+    markedForRemoval = 'markedForRemoval',
     hidden = 'hidden'
 }
 
 export default function AudioBanner() {
-    // const [markedForRemoval, setMarkedForRemoval] = useState(false);
-    // const [isHidden, setIsHidden] = useState(true);
-    // const [isRemoving, setIsRemoving] = useState(false);
-    // const [modalInitiallyRendered, setModalInitiallyRendered] = useState(false);
-    // const lastScrollTop = useRef(0);
-    // const shouldHideTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-    // const [isVisible, setIsVisible] = useState<BannerVisibility>(BannerVisibility.hidden)
-    // const [markedForRemoval, setMarkedForRemoval] = useState(false);
-
     const [bannerState, setBannerState] = useState<BannerState>(BannerState.hidden);
 
     const { t } = useI18n();
@@ -43,35 +27,12 @@ export default function AudioBanner() {
     } = useAudioContext();
 
     const scrollDirection = useScrollDirection();
-    console.log(scrollDirection);
-
-    if (scrollDirection === ScrollDirection.down && bannerState === BannerState.markedForRemoval) {
-        console.log(1);
-        setBannerState(BannerState.hidden);
-    } else if (
-        [AudioStatus.playing, AudioStatus.paused].includes(audioPlaybackState) && bannerState !== BannerState.visible
-    ) {
-        console.log(2);
-
-        setBannerState(BannerState.visible);
-    } else if (scrollDirection === ScrollDirection.none && audioPlaybackState === AudioStatus.stopped && bannerState !== BannerState.hidden && bannerState !== BannerState.markedForRemoval) {
-        console.log(3);
-
-        setBannerState(BannerState.markedForRemoval);
-    }
-    // else if (bannerState !== BannerState.hidden && scrollDirection !== ScrollDirection.up) {
-    //     console.log(4);
-
-    //     setBannerState(BannerState.hidden);
-    // }
 
     const stopPlaybackHandler = useCallback(() => {
         setBannerState(BannerState.hidden);
     }, []);
 
-
-
-    const modalTrigger = (
+    const modalTrigger = useMemo(() => (
         <div
             role="button"
             tabIndex={0}
@@ -85,70 +46,42 @@ export default function AudioBanner() {
                 </ReactMarkdown>
             </div>
         </div>
-    );
+    ), [t]);
 
-    // const removeBanner = useCallback(() => {
-    //     setIsRemoving(true);
-
-    //     if (!shouldHideTimeoutRef.current) {
-    //         shouldHideTimeoutRef.current = setTimeout(() => {
-    //             setIsHidden(true);
-    //             shouldHideTimeoutRef.current = null;
-    //         }, 500);
-    //     }
-    // }, []);
-
-    const modalFooter = (
+    const modalFooter = useMemo(() => (
         <div className="w-max m-auto min-w-0">
             <GlobalAudioPlayer labelledBy="audio-banner-title" modalMode={true} manualStopHandler={stopPlaybackHandler} />
         </div>
-    );
-
-    // useEffect(() => {
-    //     const scrollHandler = throttle(() => {
-    //         let scrollTop = window.scrollY || document.documentElement.scrollTop;
-    //         const userScrolledDown = scrollTop > lastScrollTop.current;
-
-    //         // Update last scroll position
-    //         lastScrollTop.current = scrollTop;
-
-    //         if (userScrolledDown && markedForRemoval) {
-    //             removeBanner();
-    //         } else if (shouldHideTimeoutRef.current) {
-    //             clearTimeout(shouldHideTimeoutRef.current);
-    //             shouldHideTimeoutRef.current = null;
-    //         }
-    //     }, 100);
-
-    //     scrollHandler();
-
-    //     document.addEventListener('scroll', scrollHandler);
-
-    //     return () => {
-    //         document.removeEventListener('scroll', scrollHandler);
-
-    //         if (shouldHideTimeoutRef.current) {
-    //             clearTimeout(shouldHideTimeoutRef.current);
-    //             shouldHideTimeoutRef.current = null;
-    //         }
-    //     };
-    // }, [markedForRemoval, removeBanner]);
-
-    // useEffect(() => {
-    //     if (audioPlaybackState !== AudioStatus.stopped) {
-    //         setIsRemoving(false);
-    //         setIsHidden(false);
-    //         setModalInitiallyRendered(true);
-    //     }
-
-    //     setMarkedForRemoval(audioPlaybackState === AudioStatus.stopped);
-    // }, [audioPlaybackState]);
+    ), [stopPlaybackHandler]);
 
     const bannerClasses = cn(
-        'fixed right-0 left-0 h-fit py-2 px-4 bg-amber-50 shadow-sm z-50 items-center justify-center flex-col transition-all duration-300 dark:bg-stone-950',
-        'c-audio-banner',
-        bannerState === BannerState.hidden && 'c-audio-banner--hidden'
+        'fixed right-0 left-0 h-fit py-2 px-4 bg-amber-50 shadow-sm z-50 items-center justify-center flex-col duration-300 dark:bg-stone-950',
+        '[transition:translate_0.4s_ease_allow-discrete,display_0.1s_ease_0.4s_allow-discrete]',
+        bannerState === BannerState.hidden ? 'hidden translate-y-[-100%]' : 'flex translate-y-0'
     );
+
+    useEffect(() => {
+        const shouldHideDueToScroll =
+            scrollDirection === ScrollDirection.down &&
+            bannerState === BannerState.markedForRemoval;
+
+        const shouldMakeVisible =
+            [AudioStatus.playing, AudioStatus.paused].includes(audioPlaybackState) &&
+            bannerState !== BannerState.visible;
+
+        const shouldMarkForScrollRemoval =
+            scrollDirection === ScrollDirection.none &&
+            audioPlaybackState === AudioStatus.stopped &&
+            ![BannerState.hidden, BannerState.markedForRemoval].includes(bannerState);
+
+        if (shouldHideDueToScroll) {
+            setBannerState(BannerState.hidden);
+        } else if (shouldMakeVisible) {
+            setBannerState(BannerState.visible);
+        } else if (shouldMarkForScrollRemoval) {
+            setBannerState(BannerState.markedForRemoval);
+        }
+    }, [scrollDirection, audioPlaybackState, bannerState]);
 
     return (
         <div
@@ -165,7 +98,6 @@ export default function AudioBanner() {
                 <GlobalAudioPlayer labelledBy="audio-banner-title" modalMode={false} manualStopHandler={stopPlaybackHandler} />
             </div>
 
-            {/* eztodo make suspense / async */}
             <Modal
                 trigger={modalTrigger}
                 description={`${t('audio.open_transcript_modal')} ${currentAudioData.title}`}
@@ -177,7 +109,6 @@ export default function AudioBanner() {
                     {currentAudioData.transcript ?? ''}
                 </ReactMarkdown>
             </Modal>
-
         </div>
     );
 }
