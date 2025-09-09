@@ -81,7 +81,7 @@ export default function Modal({
     handleClickOutsideFnRef.current = handleClickOutside;
 
     const handleKeydown = useCallback((event: KeyboardEvent) => {
-        if (event.key !== 'Tab') {
+        if (event.code !== 'Tab') {
             return;
         }
 
@@ -175,7 +175,7 @@ export default function Modal({
             data-testid="modal-trigger"
             onClick={() => setModalIsVisible(true)}
             onKeyDown={(event) => {
-                if([' ', 'Enter'].includes(event.key)) {
+                if(['Space', 'Enter'].includes(event.code)) {
                     event.preventDefault();
                     setModalIsVisible(true);
                 }

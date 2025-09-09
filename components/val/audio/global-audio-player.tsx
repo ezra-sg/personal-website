@@ -233,7 +233,7 @@ const GlobalAudioPlayer = memo(({ labelledBy, modalMode, manualStopHandler }: Au
                     setShowRestartIcon(false);
                 }}
                 onKeyDown={(event) => {
-                    if([' ', 'Enter'].includes(event.key)) {
+                    if(['Space', 'Enter'].includes(event.code)) {
                         event.preventDefault();
                         const newAudioStatus = isPlaying ? AudioStatus.paused : AudioStatus.playing;
                         setAudioStatus(newAudioStatus, currentAudioData.snippetId);
@@ -282,7 +282,7 @@ const GlobalAudioPlayer = memo(({ labelledBy, modalMode, manualStopHandler }: Au
                     data-testid="audio-player-speed-button"
                     onClick={() => setShowSpeedOptions(!showPlaybackSpeedOptions)}
                     onKeyDown={(event) => {
-                        if ([' ', 'Enter'].includes(event.key)) {
+                        if (['Space', 'Enter'].includes(event.code)) {
                             event.preventDefault();
                             setShowSpeedOptions(!showPlaybackSpeedOptions);
                         }
@@ -301,7 +301,7 @@ const GlobalAudioPlayer = memo(({ labelledBy, modalMode, manualStopHandler }: Au
                     aria-label={`${t('audio.audio_speed_menu_label')} ${currentAudioData.title}`}
                     data-testid="audio-player-speed-menu"
                     onKeyDown={(event) => {
-                        if (event.key === 'Escape') {
+                        if (event.code === 'Escape') {
                             setShowSpeedOptions(false);
                         }
                     }}
@@ -323,7 +323,7 @@ const GlobalAudioPlayer = memo(({ labelledBy, modalMode, manualStopHandler }: Au
                                 setShowSpeedOptions(false);
                             }}
                             onKeyDown={(event) => {
-                                if ([' ', 'Enter'].includes(event.key)) {
+                                if (['Space', 'Enter'].includes(event.code)) {
                                     event.preventDefault();
                                     if (audioElement) {
                                         audioElement.playbackRate = speed;
@@ -347,7 +347,7 @@ const GlobalAudioPlayer = memo(({ labelledBy, modalMode, manualStopHandler }: Au
                     manualStopHandler?.();
                 }}
                 onKeyDown={(event) => {
-                    if ([' ', 'Enter'].includes(event.key)) {
+                    if (['Space', 'Enter'].includes(event.code)) {
                         event.preventDefault();
                         setAudioStatus(AudioStatus.stopped, currentAudioData.snippetId);
                         setShowRestartIcon(false);
