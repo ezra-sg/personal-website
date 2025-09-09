@@ -4,8 +4,6 @@ import { MdClose } from 'react-icons/md';
 
 import { useI18n } from '@/hooks/useI18n';
 
-import './modal.scss';
-
 export type ModalExposedMethods = {
     toggleModal: (shouldBeVisible: boolean) => void;
 };
