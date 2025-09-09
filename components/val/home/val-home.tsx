@@ -40,11 +40,11 @@ export default function ValHome() {
     const [renderSectionFive, setRenderSectionFive]   = useState(false);
 
     const scrollListenerRegistered = useRef(false);
-    const sectionOneRef   = useRef<HTMLElement | null>(null);
-    const sectionTwoRef   = useRef<HTMLElement | null>(null);
-    const sectionThreeRef = useRef<HTMLElement | null>(null);
-    const sectionFourRef  = useRef<HTMLElement | null>(null);
-    const sectionFiveRef  = useRef<HTMLElement | null>(null);
+    const sectionOneRef   = useRef<HTMLElement>(null);
+    const sectionTwoRef   = useRef<HTMLElement>(null);
+    const sectionThreeRef = useRef<HTMLElement>(null);
+    const sectionFourRef  = useRef<HTMLElement>(null);
+    const sectionFiveRef  = useRef<HTMLElement>(null);
 
     const { t } = useI18n();
 
@@ -102,7 +102,9 @@ export default function ValHome() {
 
         // Observe the placeholders
         [sectionOneRef, sectionTwoRef, sectionThreeRef, sectionFourRef, sectionFiveRef].forEach((ref) => {
-            observer.observe(ref.current!);
+            if (!!ref.current) {
+                observer.observe(ref.current);
+            }
         });
 
         // Register a scroll listener to render the interactive components
@@ -135,7 +137,7 @@ export default function ValHome() {
             className="fixed -top-96 left-0 right-0 z-50 text-center underline bg-amber-50 text-amber-900 dark:text-orange-300 dark:bg-stone-950 focus-within:top-0"
             onClick={handleSkipLinkClick}
             onKeyDown={(e) => {
-                if (['Enter', ' '].includes(e.key)) {
+                if (['Enter', 'Space'].includes(e.code)) {
                     handleSkipLinkClick();
                 }
             }}

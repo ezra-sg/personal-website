@@ -242,7 +242,7 @@ const GlobalAudioPlayer = memo(({ labelledBy, modalMode, manualStopHandler }: Re
                 }}
                 aria-label={playButtonAriaLabel}
                 title={playButtonAriaLabel}
-                className="h-10 w-10 flex items-center justify-center shrink-0"
+                className="h-10 w-10 flex items-center justify-center shrink-0 cursor-pointer"
                 data-testid="audio-player-play-button"
             >
                 {
@@ -287,7 +287,7 @@ const GlobalAudioPlayer = memo(({ labelledBy, modalMode, manualStopHandler }: Re
                             setShowSpeedOptions(!showPlaybackSpeedOptions);
                         }
                     }}
-                    className="h-10 w-10 flex items-center justify-center shrink-0"
+                    className="h-10 w-10 flex items-center justify-center shrink-0 cursor-pointer"
                 >
                     <MdSpeed aria-hidden="true" />
                 </button>

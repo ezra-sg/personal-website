@@ -7,11 +7,11 @@ import LanguageSwitcher from '@/components/val/language-switcher/language-switch
 import cn from '@/utils/cn';
 
 interface ProgressTrackerProps {
-    sectionOneRef: RefObject<HTMLElement>;
-    sectionTwoRef: RefObject<HTMLElement>;
-    sectionThreeRef: RefObject<HTMLElement>;
-    sectionFourRef: RefObject<HTMLElement>;
-    sectionFiveRef: RefObject<HTMLElement>;
+    sectionOneRef: RefObject<HTMLElement | null>;
+    sectionTwoRef: RefObject<HTMLElement | null>;
+    sectionThreeRef: RefObject<HTMLElement | null>;
+    sectionFourRef: RefObject<HTMLElement | null>;
+    sectionFiveRef: RefObject<HTMLElement | null>;
 }
 
 export default function ProgressTracker({
@@ -205,7 +205,7 @@ export default function ProgressTracker({
                 {buttons.map((button, index) => (
                     <button
                         key={`nav-button-${index}`}
-                        className={`${expanded ? 'h-9 w-10 lg:w-8 lg:h-8 rounded-lg px-2' : 'h-1.5 w-1.5'} rounded-full flex items-center justify-center bg-amber-50 border-[1px] border-amber-900 transition-all z-10 hover:border-[2px] dark:bg-stone-900 dark:border-orange-300`}
+                        className={`${expanded ? 'h-9 w-10 lg:w-8 lg:h-8 rounded-lg px-2' : 'h-1.5 w-1.5'} cursor-pointer rounded-full flex items-center justify-center bg-amber-50 border-[1px] border-amber-900 transition-all z-10 hover:border-[2px] dark:bg-stone-900 dark:border-orange-300`}
                         aria-label={`${t('nav.go_to_section_label')} ${index + 1}`}
                         title={`${t('nav.go_to_section_label')} ${index + 1}`}
                         onClick={() => scrollTo({ top: button.ref.current!.offsetTop, behavior: 'instant' })}

@@ -79,7 +79,10 @@ export function AudioSpectrograph({ snippetId }: React.PropsWithChildren<{ snipp
     drawFunctionRef.current = draw;
 
     useEffect(() => {
-        drawLineOnCanvas(spectrographElementRef.current!);
+
+        if (spectrographElementRef.current) {
+            drawLineOnCanvas(spectrographElementRef.current);
+        }
     }, []);
 
     useEffect(() => {

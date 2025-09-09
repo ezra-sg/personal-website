@@ -45,7 +45,7 @@ export default function AudioBanner() {
         <div
             role="button"
             tabIndex={0}
-            className="flex gap-2 items-center justify-center cursor-pointer text-amber-900 dark:text-orange-300"
+            className="flex gap-2 items-center justify-center cursor-pointer text-amber-900 dark:text-orange-300 cursor-pointer"
         >
             <MdReadMore aria-hidden={true} />
 

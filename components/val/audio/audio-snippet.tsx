@@ -95,7 +95,7 @@ export default function AudioSnippet({ src, title, transcript }: React.PropsWith
 
             <div className="flex gap-2 items-center">
                 <button
-                    className="text-amber-900 dark:text-orange-300"
+                    className="text-amber-900 cursor-pointer dark:text-orange-300"
                     onClick={handleButtonClick}
                     aria-label={playButtonAriaLabel}
                 >
