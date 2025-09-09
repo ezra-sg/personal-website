@@ -11,7 +11,7 @@ export function AudioSpectrograph({ snippetId }: React.PropsWithChildren<{ snipp
     const isPlaying = useRef(false);
     const animationId = useRef<null | number>(null);
     const spectrographElementRef = useRef<HTMLCanvasElement | null>(null);
-    const drawFunctionRef = useRef<null | ((analyzer: AnalyserNode, dataArray: Uint8Array) => void)>(null);
+    const drawFunctionRef = useRef<null | ((analyzer: AnalyserNode, dataArray: Uint8Array<ArrayBuffer>) => void)>(null);
 
     const prefersDarkMode = usePrefersDarkMode();
 
@@ -39,7 +39,7 @@ export function AudioSpectrograph({ snippetId }: React.PropsWithChildren<{ snipp
         canvasCtx.stroke(); // Render the line
     }
 
-    const draw = useCallback((analyzer: AnalyserNode, dataArray: Uint8Array) => {
+    const draw = useCallback((analyzer: AnalyserNode, dataArray: Uint8Array<ArrayBuffer>) => {
         const canvas = spectrographElementRef.current;
         const canvasCtx = canvas?.getContext('2d');
 
