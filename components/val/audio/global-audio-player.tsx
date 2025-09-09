@@ -105,7 +105,7 @@ const GlobalAudioPlayer = memo(({ labelledBy, modalMode, manualStopHandler }: Re
 
     const handlePlaybackSpeedClickaway = useCallback((event: MouseEvent) => {
         const clickedElement = event.target as HTMLElement;
-        const userClickedAway = ![playbackSpeedMenuRef, playbackSpeedButtonRef].some(({ current }) => current!.contains(clickedElement));
+        const userClickedAway = ![playbackSpeedMenuRef, playbackSpeedButtonRef].some(({ current }) => current?.contains(clickedElement));
 
         if (userClickedAway) {
             setShowSpeedOptions(false);
@@ -114,9 +114,9 @@ const GlobalAudioPlayer = memo(({ labelledBy, modalMode, manualStopHandler }: Re
     playbackSpeedClickawayHandlerRef.current = handlePlaybackSpeedClickaway;
 
     useEffect(() => {
-        const scrubberElement = scrubberElementRef.current!;
+        const scrubberElement = scrubberElementRef.current;
 
-        if (!audioElement) {
+        if (!audioElement || !scrubberElement) {
             return;
         }
 
@@ -203,15 +203,15 @@ const GlobalAudioPlayer = memo(({ labelledBy, modalMode, manualStopHandler }: Re
 
     useEffect(() => {
         const unregisterDocumentClickawayListener = () => {
-            if (documentHasClickawayListener.current) {
-                document.removeEventListener('mousedown', playbackSpeedClickawayHandlerRef.current!);
+            if (documentHasClickawayListener.current && playbackSpeedClickawayHandlerRef.current) {
+                document.removeEventListener('mousedown', playbackSpeedClickawayHandlerRef.current);
                 documentHasClickawayListener.current = false;
             }
         };
 
         if (showPlaybackSpeedOptions) {
-            if (!documentHasClickawayListener.current) {
-                document.addEventListener('mousedown', playbackSpeedClickawayHandlerRef.current!);
+            if (!documentHasClickawayListener.current && playbackSpeedClickawayHandlerRef.current) {
+                document.addEventListener('mousedown', playbackSpeedClickawayHandlerRef.current);
                 documentHasClickawayListener.current = true;
             }
         } else {

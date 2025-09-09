@@ -22,7 +22,7 @@ export const useI18n = () => {
 
     const t = (slug: string): string => {
         const keysArray = slug.split('.');
-        const translation = findNestedValue(translations!, keysArray) ?? slug;
+        const translation = translations ? findNestedValue(translations, keysArray) ?? slug : '';
 
         return translation;
     };

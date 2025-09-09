@@ -49,15 +49,15 @@ export default function LanguageSwitcher() {
 
     useEffect(() => {
         const unregisterDocumentClickawayListener = () => {
-            if (documentHasClickawayListener.current) {
-                document.removeEventListener('mousedown', clickawayHandlerRef.current!);
+            if (documentHasClickawayListener.current && clickawayHandlerRef.current) {
+                document.removeEventListener('mousedown', clickawayHandlerRef.current);
                 documentHasClickawayListener.current = false;
             }
         };
 
         if (isOpen) {
-            if (!documentHasClickawayListener.current) {
-                document.addEventListener('mousedown', clickawayHandlerRef.current!);
+            if (!documentHasClickawayListener.current && clickawayHandlerRef.current) {
+                document.addEventListener('mousedown', clickawayHandlerRef.current);
                 documentHasClickawayListener.current = true;
             }
         } else {

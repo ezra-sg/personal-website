@@ -59,20 +59,20 @@ export default function Modal({
     const { t } = useI18n();
 
     function cleanupListeners() {
-        if (documentHasClickawayListener.current) {
-            document.removeEventListener('mousedown', handleClickOutsideFnRef.current!);
+        if (documentHasClickawayListener.current && handleClickOutsideFnRef.current) {
+            document.removeEventListener('mousedown', handleClickOutsideFnRef.current);
             documentHasClickawayListener.current = false;
         }
 
-        if (documentHasKeydownListener.current) {
-            document.removeEventListener('keydown', handleKeydownFnRef.current!);
+        if (documentHasKeydownListener.current && handleKeydownFnRef.current) {
+            document.removeEventListener('keydown', handleKeydownFnRef.current);
             documentHasKeydownListener.current = false;
         }
     }
 
     const handleClickOutside = useCallback((event: MouseEvent) => {
         const clickedElement = event.target as HTMLElement;
-        const userClickedAway = !dialogInnerRef.current!.contains(clickedElement);
+        const userClickedAway = !!dialogInnerRef.current && !dialogInnerRef.current.contains(clickedElement);
 
         if (userClickedAway) {
             setModalIsVisible(false);
@@ -134,13 +134,13 @@ export default function Modal({
     useEffect(() => {
         function handleModalVisibilityChange(visible: boolean) {
             if (visible) {
-                if (!documentHasClickawayListener.current) {
-                    document.addEventListener('mousedown', handleClickOutsideFnRef.current!);
+                if (!documentHasClickawayListener.current && handleClickOutsideFnRef.current) {
+                    document.addEventListener('mousedown', handleClickOutsideFnRef.current);
                     documentHasClickawayListener.current = true;
                 }
 
-                if (!documentHasKeydownListener.current) {
-                    document.addEventListener('keydown', handleKeydownFnRef.current!);
+                if (!documentHasKeydownListener.current && handleKeydownFnRef.current) {
+                    document.addEventListener('keydown', handleKeydownFnRef.current);
                     documentHasKeydownListener.current = true;
                 }
 
@@ -203,7 +203,7 @@ export default function Modal({
                         </div>
 
                         <button
-                            className="h-8 w-8 m-4 flex items-center justify-center shrink-0 rounded-full border-[1px] border-amber-900 hover:border-[2px] dark:border-orange-300"
+                            className="h-8 w-8 m-4 flex cursor-pointer items-center justify-center shrink-0 rounded-full border-[1px] border-amber-900 hover:border-[2px] dark:border-orange-300"
                             data-testid="modal-close-button"
                             title={`${t('modal.close_modal_label')} ${title}`}
                             aria-label={`${t('modal.close_modal_label')} ${title}`}

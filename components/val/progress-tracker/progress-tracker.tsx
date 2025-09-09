@@ -150,7 +150,7 @@ export default function ProgressTracker({
             const newProgressPercent = Number(overallProgress.toFixed(0));
 
             setProgressPercent(newProgressPercent);
-            rootElementRef.current!.style.setProperty('--progress-percent', `${newProgressPercent}%`);
+            rootElementRef.current?.style.setProperty('--progress-percent', `${newProgressPercent}%`);
         }, 100);
 
         scrollHandler();
@@ -208,7 +208,7 @@ export default function ProgressTracker({
                         className={`${expanded ? 'h-9 w-10 lg:w-8 lg:h-8 rounded-lg px-2' : 'h-1.5 w-1.5'} cursor-pointer rounded-full flex items-center justify-center bg-amber-50 border-[1px] border-amber-900 transition-all z-10 hover:border-[2px] dark:bg-stone-900 dark:border-orange-300`}
                         aria-label={`${t('nav.go_to_section_label')} ${index + 1}`}
                         title={`${t('nav.go_to_section_label')} ${index + 1}`}
-                        onClick={() => scrollTo({ top: button.ref.current!.offsetTop, behavior: 'instant' })}
+                        onClick={() => scrollTo({ top: button.ref.current?.offsetTop ?? 0, behavior: 'instant' })}
                         onFocus={() => setExpanded(true)}
                     >
                         {expanded && <span className="text-sm font-header text-amber-900 animate-fade-in-fast dark:text-orange-300">{button.label}</span>}
