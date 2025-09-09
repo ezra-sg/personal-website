@@ -23,7 +23,7 @@ enum IconName  {
     restart = 'restart',
 }
 
-export default function AudioSnippet({ src, title, transcript }: AudioSnippetProps) {
+export default function AudioSnippet({ src, title, transcript }: React.PropsWithChildren<AudioSnippetProps>) {
     const [icon, setIcon] = useState<IconName>(IconName.play);
 
     const snippetId = title.replaceAll(' ', '-').toLowerCase();

@@ -6,7 +6,7 @@ import usePrefersDarkMode from '@/hooks/usePrefersDarkMode';
 const ORANGE_300 = '#fdba74';
 const AMBER_900 = '#78350f';
 
-export function AudioSpectrograph({ snippetId }: { snippetId: string }) {
+export function AudioSpectrograph({ snippetId }: React.PropsWithChildren<{ snippetId: string }>) {
     const color = useRef(ORANGE_300);
     const isPlaying = useRef(false);
     const animationId = useRef<null | number>(null);

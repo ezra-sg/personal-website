@@ -20,7 +20,7 @@ export default function ProgressTracker({
     sectionThreeRef,
     sectionFourRef,
     sectionFiveRef,
-}: ProgressTrackerProps) {
+}: React.PropsWithChildren<ProgressTrackerProps>) {
     const [progressPercent, setProgressPercent] = useState(0);
     const [expanded, setExpanded] = useState(false);
     const [hidden, setHidden] = useState(true);

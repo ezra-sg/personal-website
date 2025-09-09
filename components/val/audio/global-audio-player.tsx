@@ -67,7 +67,7 @@ const scrubberClasses = cn(
 
 export const playbackSpeedOptions = [0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75];
 
-const GlobalAudioPlayer = memo(({ labelledBy, modalMode, manualStopHandler }: AudioPlayerProps) => {
+const GlobalAudioPlayer = memo(({ labelledBy, modalMode, manualStopHandler }: React.PropsWithChildren<AudioPlayerProps>) => {
     const [showPlaybackSpeedOptions, setShowSpeedOptions] = useState(false);
     const [playbackSpeed, setPlaybackSpeed] = useState(1);
     const [showRestartIcon, setShowRestartIcon] = useState(false);
