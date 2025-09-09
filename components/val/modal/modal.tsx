@@ -81,6 +81,7 @@ export default function Modal({
     handleClickOutsideFnRef.current = handleClickOutside;
 
     const handleKeydown = useCallback((event: KeyboardEvent) => {
+        console.log(event.code);
         if (event.code !== 'Tab') {
             return;
         }
@@ -96,11 +97,12 @@ export default function Modal({
         if (event.shiftKey) {
             if (document.activeElement === firstFocusableInDocument) {
                 firstFocusableInDialog.focus();
+                event.preventDefault();
             } else if (document.activeElement === firstFocusableInDialog) {
                 lastFocusableInDialog.focus();
+                event.preventDefault();
             }
 
-            event.preventDefault();
             return;
         }
 
