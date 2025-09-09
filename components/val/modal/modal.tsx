@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useImperativeHandle, useRef, useState } from 'react';
 
 import { MdClose } from 'react-icons/md';
 
@@ -6,13 +6,16 @@ import { useI18n } from '@/hooks/useI18n';
 
 import './modal.scss';
 
+export type ModalExposedMethods = {
+    toggleModal: (shouldBeVisible: boolean) => void;
+};
 export type ModalProps = {
     description: string;
     title: string;
     subtitle: string;
     trigger: React.ReactNode;
-    children: React.ReactNode;
     footer?: React.ReactNode;
+    ref: React.Ref<ModalExposedMethods>;
 };
 
 const dialogDimensionalClasses = 'w-[90vw] max-w-[1000px] min-h-[40vh] max-h-[80vh] md:max-h-[600px]';
@@ -32,7 +35,15 @@ const focusableElementsString = `
 type ClickListener = (event: MouseEvent) => void;
 type KeydownListener = (event: KeyboardEvent) => void;
 
-export default function Modal({ children, description, title, subtitle, trigger, footer }: ModalProps) {
+export default function Modal({
+    children,
+    description,
+    title,
+    subtitle,
+    trigger,
+    footer,
+    ref,
+}: React.PropsWithChildren<ModalProps>) {
     const [modalIsVisible, setModalIsVisible] = useState(false);
 
     const dialogRef = useRef<HTMLDialogElement | null>(null);
@@ -42,6 +53,10 @@ export default function Modal({ children, description, title, subtitle, trigger,
     const handleKeydownFnRef = useRef <KeydownListener | null>(null);
     const documentHasClickawayListener = useRef(false);
     const documentHasKeydownListener = useRef(false);
+
+    useImperativeHandle(ref, () => ({
+        toggleModal: (visible) => setModalIsVisible(visible)
+    }), [setModalIsVisible]);
 
     const { t } = useI18n();
 
@@ -148,7 +163,7 @@ export default function Modal({ children, description, title, subtitle, trigger,
 
         if (footerElementRef.current) {
             // if the footer is visible, add extra padding to the bottom of the dialog content so it doesn't get cut off
-            dialogRef.current?.style.setProperty('--extra-margin-bottom', `${footerElementRef.current.offsetHeight + 16}px`);
+            dialogRef.current?.style.setProperty('--extra-margin-bottom', `${footerElementRef.current.offsetHeight}px`);
         }
     }, [modalIsVisible]);
 
@@ -162,7 +177,7 @@ export default function Modal({ children, description, title, subtitle, trigger,
             data-testid="modal-trigger"
             onClick={() => setModalIsVisible(true)}
             onKeyDown={(event) => {
-                if([' ', 'Enter'].includes(event.key)) {
+                if(['Space', 'Enter'].includes(event.key)) {
                     event.preventDefault();
                     setModalIsVisible(true);
                 }
@@ -177,8 +192,8 @@ export default function Modal({ children, description, title, subtitle, trigger,
             className={`${modalIsVisible ? 'flex' : ''} ${dialogDimensionalClasses} m-auto h-max fixed top-0 right-0 bottom-0 left-0 items-center justify-center overflow-hidden bg-transparent backdrop:bg-black backdrop:opacity-90`}
         >
             <div className={`relative ${dialogDimensionalClasses} rounded-sm overflow-hidden flex h-max`}>
-                <div ref={dialogInnerRef} className="relative w-full bg-white dark:bg-stone-950 dark:text-amber-50">
-                    <header className="absolute top-0 left-0 right-0 shadow-sm flex justify-between items-center bg-amber-50 dark:bg-stone-950">
+                <div ref={dialogInnerRef} className="relative w-full flex flex-col bg-white dark:bg-stone-950 dark:text-amber-50">
+                    <header className="sticky top-0 left-0 right-0 shadow-sm flex justify-between items-center bg-amber-50 dark:bg-stone-950">
                         <div className="ml-4 my-2 dark:text-amber-50">
                             <h1 className="font-header">
                                 {title}
@@ -199,14 +214,14 @@ export default function Modal({ children, description, title, subtitle, trigger,
                         </button>
                     </header>
 
-                    <div className="c-modal__content">
+                    <div className="p-4 lg:p-8 overflow-y-auto dark:bg-stone-900 h-[calc(100% - 4rem)] border-b-(length:--extra-margin-bottom) border-b-transparent">
                         {children}
                     </div>
 
                     {footer && (
                         <footer
                             ref={footerElementRef}
-                            className="sticky bottom-0 left-0 right-0 p-2 flex justify-center items-center shadow-sm bg-amber-50 dark:bg-stone-950"
+                            className="absolute bottom-0 left-0 right-0 p-2 flex justify-center items-center shadow-sm bg-amber-50 dark:bg-stone-950"
                         >
                             {footer}
                         </footer>

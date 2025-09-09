@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useId, useMemo, useRef, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { MdReadMore } from 'react-icons/md';
 
@@ -8,18 +8,26 @@ import useScrollDirection, { ScrollDirection } from '@/hooks/useScrollDirection'
 import cn from '@/utils/cn';
 
 import GlobalAudioPlayer from '@/components/val/audio/global-audio-player';
-import Modal from '@/components/val/modal/modal';
+import Modal, { ModalExposedMethods } from '@/components/val/modal/modal';
 
 enum BannerState {
+    // the audio banner is visible
     visible = 'visible',
+
+    // the audio banner is not visible
+    hidden = 'hidden',
+
+    // the audio clip has finished playing, and the banner will go away if the user scrolls down, though the user can choose to restart or scrub audio before scrolling
     markedForRemoval = 'markedForRemoval',
-    hidden = 'hidden'
 }
 
 export default function AudioBanner() {
     const [bannerState, setBannerState] = useState<BannerState>(BannerState.hidden);
 
     const { t } = useI18n();
+    const id = useId();
+    const titleId = `audio-banner-${id}`;
+    const modalRef = useRef<ModalExposedMethods>(null)
 
     const {
         audioPlaybackState,
@@ -30,6 +38,7 @@ export default function AudioBanner() {
 
     const stopPlaybackHandler = useCallback(() => {
         setBannerState(BannerState.hidden);
+        modalRef.current?.toggleModal(false);
     }, [setBannerState]);
 
     const modalTrigger = useMemo(() => (
@@ -90,12 +99,12 @@ export default function AudioBanner() {
             inert={bannerState === BannerState.hidden}
             aria-label={t('audio.audio_banner_aria')}
         >
-            <h3 id="audio-banner-title" className="font-header text-sm dark:text-white">
+            <h3 id={titleId} className="font-header text-sm dark:text-white">
                 {currentAudioData.title}
             </h3>
 
             <div className="max-w-lg m-auto">
-                <GlobalAudioPlayer labelledBy="audio-banner-title" modalMode={false} manualStopHandler={stopPlaybackHandler} />
+                <GlobalAudioPlayer labelledBy={titleId} modalMode={false} manualStopHandler={stopPlaybackHandler} />
             </div>
 
             <Modal
@@ -104,6 +113,7 @@ export default function AudioBanner() {
                 title={currentAudioData.title ?? ''}
                 subtitle={t('audio.audio_transcript')}
                 footer={modalFooter}
+                ref={modalRef}
             >
                 <ReactMarkdown>
                     {currentAudioData.transcript ?? ''}
