@@ -233,9 +233,10 @@ const GlobalAudioPlayer = memo(({ labelledBy, modalMode, manualStopHandler }: Au
                     setShowRestartIcon(false);
                 }}
                 onKeyDown={(event) => {
-                    if(['Space', 'Enter'].includes(event.key)) {
+                    if([' ', 'Enter'].includes(event.key)) {
                         event.preventDefault();
-                        setAudioStatus(AudioStatus.paused, currentAudioData.snippetId);
+                        const newAudioStatus = isPlaying ? AudioStatus.paused : AudioStatus.playing;
+                        setAudioStatus(newAudioStatus, currentAudioData.snippetId);
                         setShowRestartIcon(false);
                     }
                 }}

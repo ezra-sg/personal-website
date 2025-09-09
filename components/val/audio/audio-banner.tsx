@@ -59,7 +59,7 @@ export default function AudioBanner() {
 
     const modalFooter = useMemo(() => (
         <div className="w-max m-auto min-w-0">
-            <GlobalAudioPlayer labelledBy="audio-banner-title" modalMode={true} manualStopHandler={stopPlaybackHandler} />
+            <GlobalAudioPlayer labelledBy={titleId} modalMode={true} manualStopHandler={stopPlaybackHandler} />
         </div>
     ), [stopPlaybackHandler]);
 

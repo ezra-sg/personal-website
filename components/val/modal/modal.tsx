@@ -81,6 +81,10 @@ export default function Modal({
     handleClickOutsideFnRef.current = handleClickOutside;
 
     const handleKeydown = useCallback((event: KeyboardEvent) => {
+        if (event.key !== 'Tab') {
+            return;
+        }
+
         // Get focusable elements
         const focusableElementsInDialog = Array.from(dialogRef.current?.querySelectorAll(focusableElementsString) ?? []);
         const focusableElementsInDocument = Array.from(document.querySelectorAll(focusableElementsString));
@@ -88,10 +92,6 @@ export default function Modal({
         const lastFocusableInDialog = focusableElementsInDialog[focusableElementsInDialog.length - 1] as HTMLElement;
         const firstFocusableInDocument = focusableElementsInDocument[0] as HTMLElement;
         const lastFocusableInDocument = focusableElementsInDocument[focusableElementsInDialog.length - 1] as HTMLElement;
-
-        if (event.key !== 'Tab') {
-            return;
-        }
 
         if (event.shiftKey) {
             if (document.activeElement === firstFocusableInDocument) {
@@ -175,7 +175,7 @@ export default function Modal({
             data-testid="modal-trigger"
             onClick={() => setModalIsVisible(true)}
             onKeyDown={(event) => {
-                if(['Space', 'Enter'].includes(event.key)) {
+                if([' ', 'Enter'].includes(event.key)) {
                     event.preventDefault();
                     setModalIsVisible(true);
                 }
