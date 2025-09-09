@@ -81,7 +81,6 @@ export default function Modal({
     handleClickOutsideFnRef.current = handleClickOutside;
 
     const handleKeydown = useCallback((event: KeyboardEvent) => {
-        console.log(event.code);
         if (event.code !== 'Tab') {
             return;
         }
