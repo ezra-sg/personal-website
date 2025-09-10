@@ -1,6 +1,11 @@
-import { RefObject, useEffect, useRef, useState } from 'react';
+import {
+    RefObject,
+    useCallback,
+    useEffect,
+    useRef,
+    useState,
+} from 'react';
 
-import throttle from '@/utils/throttle';
 import { useI18n } from '@/hooks/useI18n';
 
 import LanguageSwitcher from '@/components/val/language-switcher/language-switcher';
@@ -27,6 +32,7 @@ export default function ProgressTracker({
 
     const rootElementRef = useRef<HTMLDivElement | null>(null);
     const lastScrollTop = useRef(0);
+    const rafId = useRef<number>(null);
 
     const { t } = useI18n();
 
@@ -71,101 +77,106 @@ export default function ProgressTracker({
         },
     ];
 
+    const scrollHandler = useCallback(() => {
+        // scroll handler controls 3 things:
+        // 1. whether the progress tracker is hidden or not, based on whether the user has scrolled past the height of the viewport
+        // 2. whether the progress tracker is expanded or not, based on the user's scroll direction
+        // 3. the progress percentage, based on the user's scroll position
+
+        const sectionOne = sectionOneRef.current;
+        const sectionTwo = sectionTwoRef.current;
+        const sectionThree = sectionThreeRef.current;
+        const sectionFour = sectionFourRef.current;
+        const sectionFive = sectionFiveRef.current;
+
+        if (!sectionOne || !sectionTwo || !sectionThree || !sectionFour || !sectionFive) {
+            return;
+        }
+
+        let scrollTop = window.scrollY || document.documentElement.scrollTop;
+        const userScrolledDown = scrollTop >= lastScrollTop.current;
+
+        (scrollTop !== lastScrollTop.current) && setExpanded(!userScrolledDown);
+
+        setHidden(scrollTop < 100);
+
+        // Update last scroll position
+        lastScrollTop.current = scrollTop;
+
+        const sectionOneHeight = sectionOne.clientHeight;
+        const sectionTwoHeight = sectionTwo.clientHeight;
+        const sectionThreeHeight = sectionThree.clientHeight;
+        const sectionFourHeight = sectionFour.clientHeight;
+        const sectionFiveHeight = sectionFive.clientHeight;
+
+        const sectionOneOffset = sectionOne.offsetTop;
+        const sectionTwoOffset = sectionTwo.offsetTop;
+        const sectionThreeOffset = sectionThree.offsetTop;
+        const sectionFourOffset = sectionFour.offsetTop;
+        const sectionFiveOffset = sectionFive.offsetTop;
+
+        // Calculate how far the user has scrolled, taking the starting offset into account.
+        const scrolledTop = Math.max(0, window.scrollY || document.documentElement.scrollTop);
+        const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+        const bottomOfScreen = scrolledTop + viewportHeight;
+
+        let currentSectionProgress: number;
+        let scrolledPastHeight: number;
+
+        const getSectionProgressPercentage = (sectionOffset: number, sectionHeight: number) => {
+            let percentageAboveBottom = ((scrolledTop + viewportHeight - sectionOffset) / sectionHeight) * 100;
+            return Math.min(100, Math.max(0, percentageAboveBottom));
+        };
+
+        // Determine which section the user is currently in and calculate the progress within that section
+        if ((scrolledTop + viewportHeight) < sectionOneOffset) {
+            currentSectionProgress = 0;
+            scrolledPastHeight = 0;
+        } else if ((sectionOneOffset + sectionOneHeight) > bottomOfScreen) {
+            currentSectionProgress = getSectionProgressPercentage(sectionOneOffset, sectionOneHeight);
+            scrolledPastHeight = 0;
+        } else if ((sectionTwoOffset + sectionTwoHeight) > bottomOfScreen) {
+            currentSectionProgress = getSectionProgressPercentage(sectionTwoOffset, sectionTwoHeight);
+            scrolledPastHeight = 1 / 5 * 100;
+        } else if ((sectionThreeOffset + sectionThreeHeight) > bottomOfScreen) {
+            currentSectionProgress = getSectionProgressPercentage(sectionThreeOffset, sectionThreeHeight);
+            scrolledPastHeight = 2 / 5 * 100;
+        } else if ((sectionFourOffset + sectionFourHeight) > bottomOfScreen) {
+            currentSectionProgress = getSectionProgressPercentage(sectionFourOffset, sectionFourHeight);
+            scrolledPastHeight = 3 / 5 * 100;
+        } else {
+            currentSectionProgress = getSectionProgressPercentage(sectionFiveOffset, sectionFiveHeight);
+            scrolledPastHeight = 4 / 5 * 100;
+        }
+
+        // Calculate the overall progress by combining the progress in the current section with the height of sections the user has already scrolled past
+        const overallProgress = scrolledPastHeight + (currentSectionProgress * 1 / 5);
+
+        const newProgressPercent = Number(overallProgress.toFixed(0));
+
+        setProgressPercent(newProgressPercent);
+        rootElementRef.current?.style.setProperty('--progress-percent', `${newProgressPercent}%`);
+    }, [setProgressPercent, setHidden, setExpanded]);
+
+    const rafHandler = useCallback(() => {
+        if (rafId.current) {
+            cancelAnimationFrame(rafId.current);
+        }
+
+        rafId.current = requestAnimationFrame(scrollHandler);
+    }, []);
+
     useEffect(() => {
-        const scrollHandler = throttle(() => {
-            // scroll handler controls 3 things:
-            // 1. whether the progress tracker is hidden or not, based on whether the user has scrolled past the height of the viewport
-            // 2. whether the progress tracker is expanded or not, based on the user's scroll direction
-            // 3. the progress percentage, based on the user's scroll position
+        rafHandler();
 
-            let scrollTop = window.scrollY || document.documentElement.scrollTop;
-            const userScrolledDown = scrollTop >= lastScrollTop.current;
-
-            (scrollTop !== lastScrollTop.current) && setExpanded(!userScrolledDown);
-
-            setHidden(scrollTop < 100);
-
-            // Update last scroll position
-            lastScrollTop.current = scrollTop;
-
-            const sectionOne = sectionOneRef.current;
-            const sectionTwo = sectionTwoRef.current;
-            const sectionThree = sectionThreeRef.current;
-            const sectionFour = sectionFourRef.current;
-            const sectionFive = sectionFiveRef.current;
-
-            if (!sectionOne || !sectionTwo || !sectionThree || !sectionFour || !sectionFive) {
-                return;
-            }
-
-            const sectionOneHeight = sectionOne.clientHeight;
-            const sectionTwoHeight = sectionTwo.clientHeight;
-            const sectionThreeHeight = sectionThree.clientHeight;
-            const sectionFourHeight = sectionFour.clientHeight;
-            const sectionFiveHeight = sectionFive.clientHeight;
-
-            const sectionOneOffset = sectionOne.offsetTop;
-            const sectionTwoOffset = sectionTwo.offsetTop;
-            const sectionThreeOffset = sectionThree.offsetTop;
-            const sectionFourOffset = sectionFour.offsetTop;
-            const sectionFiveOffset = sectionFive.offsetTop;
-
-            // Calculate how far the user has scrolled, taking the starting offset into account.
-            const scrolledTop = Math.max(0, window.scrollY || document.documentElement.scrollTop);
-            const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
-            const bottomOfScreen = scrolledTop + viewportHeight;
-
-            let currentSectionProgress: number;
-            let scrolledPastHeight: number;
-
-            const getSectionProgressPercentage = (sectionOffset: number, sectionHeight: number) => {
-                let percentageAboveBottom = ((scrolledTop + viewportHeight - sectionOffset) / sectionHeight) * 100;
-                return Math.min(100, Math.max(0, percentageAboveBottom));
-            };
-
-            // Determine which section the user is currently in and calculate the progress within that section
-            if ((scrolledTop + viewportHeight) < sectionOneOffset) {
-                currentSectionProgress = 0;
-                scrolledPastHeight = 0;
-            } else if ((sectionOneOffset + sectionOneHeight) > bottomOfScreen) {
-                currentSectionProgress = getSectionProgressPercentage(sectionOneOffset, sectionOneHeight);
-                scrolledPastHeight = 0;
-            } else if ((sectionTwoOffset + sectionTwoHeight) > bottomOfScreen) {
-                currentSectionProgress = getSectionProgressPercentage(sectionTwoOffset, sectionTwoHeight);
-                scrolledPastHeight = 1/5 * 100;
-            } else if ((sectionThreeOffset + sectionThreeHeight) > bottomOfScreen) {
-                currentSectionProgress = getSectionProgressPercentage(sectionThreeOffset, sectionThreeHeight);
-                scrolledPastHeight = 2/5 * 100;
-            } else if ((sectionFourOffset + sectionFourHeight) > bottomOfScreen) {
-                currentSectionProgress = getSectionProgressPercentage(sectionFourOffset, sectionFourHeight);
-                scrolledPastHeight = 3/5 * 100;
-            } else {
-                currentSectionProgress = getSectionProgressPercentage(sectionFiveOffset, sectionFiveHeight);
-                scrolledPastHeight = 4/5 * 100;
-            }
-
-            // Calculate the overall progress by combining the progress in the current section with the height of sections the user has already scrolled past
-            const overallProgress = scrolledPastHeight + (currentSectionProgress * 1/5);
-
-            const newProgressPercent = Number(overallProgress.toFixed(0));
-
-            setProgressPercent(newProgressPercent);
-            rootElementRef.current?.style.setProperty('--progress-percent', `${newProgressPercent}%`);
-        }, 100);
-
-        scrollHandler();
-
-        document.addEventListener('scroll', scrollHandler);
+        document.addEventListener('scroll', rafHandler, { passive: true });
 
         return () => {
-            document.removeEventListener('scroll', scrollHandler);
+            document.removeEventListener('scroll', rafHandler);
         };
     }, [
-        sectionOneRef,
-        sectionTwoRef,
-        sectionThreeRef,
-        sectionFourRef,
-        sectionFiveRef,
+        scrollHandler,
+        rafHandler,
     ]);
 
     return (
@@ -177,7 +188,7 @@ export default function ProgressTracker({
             aria-valuemax={100}
             aria-valuenow={Number(progressPercent.toFixed(0))}
             hidden={hidden}
-            aria-hidden={hidden}
+            inert={hidden}
             onMouseOver={() => setExpanded(true)}
         >
             {expanded && (
