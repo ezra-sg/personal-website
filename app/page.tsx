@@ -75,6 +75,19 @@ export default function Home() {
                 </li>
             </ul>
 
+            <h2 className="mb-2">
+                Projects:
+            </h2>
+            <ul className="list-disc ml-4 mb-6">
+                <li>
+                    <Link href="https://allegoryjs.com" className="text-blue-500 hover:underline">
+                        allegory.js
+                    </Link>
+                    <br/>
+                    - an open source interactive fiction game engine built for the web, with local natural language processing baked in
+                </li>
+            </ul>
+
             <p>Below you can get a sneak peek of what&apos;s to come:</p>
 
             <ul className="list-disc ml-4">
