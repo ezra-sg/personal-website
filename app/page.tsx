@@ -34,8 +34,8 @@ export default function Home() {
                             <ul className="space-y-2">
                                 <li className="flex items-center gap-3">
                                     <MdEmail className="text-xl" />
-                                    <Link href="mailto:esowdenguzman@pm.me" className="underline hover:no-underline">
-                                        esowdenguzman@pm.me
+                                    <Link href="mailto:hello@ezra-sg.com" className="underline hover:no-underline">
+                                        hello@ezra-sg.com
                                     </Link>
                                 </li>
                                 <li className="flex items-center gap-3">
