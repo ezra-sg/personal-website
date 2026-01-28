@@ -40,11 +40,11 @@ export default function ValHome() {
     const [renderSectionFive, setRenderSectionFive]   = useState(false);
 
     const scrollListenerRegistered = useRef(false);
-    const sectionOneRef   = useRef<HTMLElement | null>(null);
-    const sectionTwoRef   = useRef<HTMLElement | null>(null);
-    const sectionThreeRef = useRef<HTMLElement | null>(null);
-    const sectionFourRef  = useRef<HTMLElement | null>(null);
-    const sectionFiveRef  = useRef<HTMLElement | null>(null);
+    const sectionOneRef   = useRef<HTMLElement>(null!);
+    const sectionTwoRef   = useRef<HTMLElement>(null!);
+    const sectionThreeRef = useRef<HTMLElement>(null!);
+    const sectionFourRef  = useRef<HTMLElement>(null!);
+    const sectionFiveRef  = useRef<HTMLElement>(null!);
 
     const { t } = useI18n();
 
