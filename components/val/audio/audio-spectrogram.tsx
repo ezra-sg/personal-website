@@ -9,7 +9,7 @@ const AMBER_900 = '#78350f';
 export function AudioSpectrograph({ snippetId }: { snippetId: string }) {
     const color = useRef(ORANGE_300);
     const isPlaying = useRef(false);
-    const animationId = useRef<null | number>();
+    const animationId = useRef<null | number>(null);
     const spectrogramElementRef = useRef<HTMLCanvasElement | null>(null);
     const drawFunctionRef = useRef<null | ((analyzer: AnalyserNode, dataArray: Uint8Array) => void)>(null);
 
@@ -49,7 +49,7 @@ export function AudioSpectrograph({ snippetId }: { snippetId: string }) {
 
         const barWidth = (canvas.width / 24) / 2;
 
-        analyzer.getByteFrequencyData(dataArray);
+        analyzer.getByteFrequencyData(dataArray as Uint8Array<ArrayBuffer>);
 
         canvasCtx.clearRect(0, 0, canvas.width, canvas.height);
 
