@@ -62,8 +62,8 @@ export default function Home() {
                         </li>
                         <li className="flex items-center gap-3">
                             <BsLinkedin className="text-xl" />
-                            <Link href="https://www.linkedin.com/in/Ezra-sg" className="underline hover:no-underline">
-                                linkedin.com/in/Ezra-sg
+                            <Link href="https://www.linkedin.com/in/ezra-sg" className="underline hover:no-underline">
+                                linkedin.com/in/ezra-sg
                             </Link>
                         </li>
                         <li className="flex items-center gap-3">
