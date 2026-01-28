@@ -1,12 +1,6 @@
 import Script from 'next/script';
 
 import './globals.css';
-import { Inter } from 'next/font/google';
-
-const inter = Inter({
-    subsets: ['latin'],
-    preload: true,
-});
 
 export default function RootLayout({
     children,
@@ -17,7 +11,7 @@ export default function RootLayout({
         <html lang="en">
             <Script data-goatcounter="https://ezra-sg.goatcounter.com/count" strategy="lazyOnload" src="//gc.zgo.at/count.js" />
 
-            <body className={inter.className}>{children}</body>
+            <body className="font-mono">{children}</body>
         </html>
     );
 }

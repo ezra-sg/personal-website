@@ -24,11 +24,11 @@ export default function Home() {
     return (
         <main className="min-h-screen bg-[#e5e5e5] text-[#2d2d2d] dark:bg-[#2d2d2d] dark:text-white font-mono">
             <div className="max-w-[1200px] mx-auto px-6 py-12 md:py-16">
-                {/* Desktop: Bio left, Contact+Projects right sidebar */}
+                {/* Desktop: Bio left, Contact+Projects stacked in right sidebar */}
                 {/* Mobile: Contact, hr, Bio, hr, Projects */}
                 <div className="flex flex-col md:flex-row md:gap-8">
-                    {/* Contact Section - Shows first on mobile and desktop right sidebar */}
-                    <section className="md:order-2 md:w-[300px] md:flex-shrink-0 mb-0 md:mb-8">
+                    {/* Contact Section - Shows first on mobile, in desktop right sidebar (top) */}
+                    <section className="md:hidden mb-0">
                         <h2 className="text-2xl font-bold mb-4">Contact</h2>
                         <ul className="space-y-2">
                             <li className="flex items-center gap-3">
@@ -67,7 +67,7 @@ export default function Home() {
                             </p>
                             <p className="text-lg leading-relaxed mb-4">
                                 My experience lies mostly in the frontend space, where I spend my time making it easy and enjoyable
-                                for users to interact with complex concepts, and enabling my team to turn user intentions into concrete
+                                for users to interact with complex concepts, and enabling my team to turn their intentions into concrete
                                 data and changes in our systems. I care deeply about doing things the right way, from having high standards
                                 for code quality to treating my teammates with the dignity and respect they deserve. I make use of AI in my
                                 workflow now, and I treat it as an eager junior engineer who has a lot of knowledge, but very little experience
@@ -88,8 +88,8 @@ export default function Home() {
                     {/* Horizontal rule before Projects on mobile only */}
                     <hr className="border-t-2 border-current my-8 md:hidden" />
 
-                    {/* Projects Section - Shows last on mobile, in right sidebar on desktop */}
-                    <section className="md:order-3 md:w-[300px] md:flex-shrink-0 md:border-t-2 md:border-current md:pt-8">
+                    {/* Projects Section - Shows last on mobile, hidden on desktop (shown in aside below) */}
+                    <section className="md:hidden">
                         <h2 className="text-2xl font-bold mb-4">Projects</h2>
                         <ul className="space-y-6">
                             <li>
@@ -114,6 +114,61 @@ export default function Home() {
                             </li>
                         </ul>
                     </section>
+
+                    {/* Desktop Right Sidebar - Contact and Projects stacked */}
+                    <aside className="hidden md:block md:order-2 md:w-[300px] md:flex-shrink-0">
+                        {/* Contact Section */}
+                        <section className="mb-8">
+                            <h2 className="text-2xl font-bold mb-4">Contact</h2>
+                            <ul className="space-y-2">
+                                <li className="flex items-center gap-3">
+                                    <MdEmail className="text-xl" />
+                                    <Link href="mailto:hello@ezra-sg.com" className="underline hover:no-underline">
+                                        hello@ezra-sg.com
+                                    </Link>
+                                </li>
+                                <li className="flex items-center gap-3">
+                                    <BsLinkedin className="text-xl" />
+                                    <Link href="https://www.linkedin.com/in/ezra-sg" className="underline hover:no-underline">
+                                        linkedin.com/in/ezra-sg
+                                    </Link>
+                                </li>
+                                <li className="flex items-center gap-3">
+                                    <BsGithub className="text-xl" />
+                                    <Link href="https://github.com/ezra-sg" className="underline hover:no-underline">
+                                        github.com/ezra-sg
+                                    </Link>
+                                </li>
+                            </ul>
+                        </section>
+
+                        {/* Projects Section */}
+                        <section className="border-t-2 border-current pt-8">
+                            <h2 className="text-2xl font-bold mb-4">Projects</h2>
+                            <ul className="space-y-6">
+                                <li>
+                                    <Link href="https://allegoryjs.com" className="text-xl underline hover:no-underline font-bold">
+                                        allegory.js
+                                    </Link>
+                                    <p className="mt-1">An open source web based interactive fiction game engine</p>
+                                </li>
+                                <li>
+                                    <Link href="/val/en" className="text-xl underline hover:no-underline font-bold">
+                                        Val
+                                    </Link>
+                                    <span className="ml-2 text-sm">(work in progress)</span>
+                                    <p className="mt-1">A website dedicated to my father</p>
+                                </li>
+                                <li>
+                                    <span className="text-xl font-bold text-[#808080] dark:text-[#999999]">
+                                        Kim
+                                    </span>
+                                    <span className="ml-2 text-sm">(coming soon)</span>
+                                    <p className="mt-1">A website dedicated to my mother</p>
+                                </li>
+                            </ul>
+                        </section>
+                    </aside>
                 </div>
             </div>
         </main>
