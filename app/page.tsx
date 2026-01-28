@@ -67,7 +67,7 @@ export default function Home() {
                             </p>
                             <p className="text-lg leading-relaxed mb-4">
                                 My experience lies mostly in the frontend space, where I spend my time making it easy and enjoyable
-                                for users to interact with complex concepts, and enabling my team to turn their intentions into concrete
+                                for users to interact with complex concepts, and enabling my team to turn user intentions into concrete
                                 data and changes in our systems. I care deeply about doing things the right way, from having high standards
                                 for code quality to treating my teammates with the dignity and respect they deserve. I make use of AI in my
                                 workflow now, and I treat it as an eager junior engineer who has a lot of knowledge, but very little experience
