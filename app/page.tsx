@@ -85,24 +85,24 @@ export default function Home() {
                     <div className="md:order-1 md:flex-1">
                         <section>
                             <p className="text-lg leading-relaxed mb-4">
-                                Hi! I&apos;m Ezra. I&apos;m a Philadelphia-based technologist who&apos;s been tinkering, building, breaking, 
+                                Hi! I&apos;m Ezra. I&apos;m a Philadelphia-based technologist who&apos;s been tinkering, building, breaking,
                                 and creating with computers since childhood. I am currently a Senior Software Engineer at{' '}
                                 <Link href="https://tucows.com" className="underline hover:no-underline">
                                     Tucows
                                 </Link>, helping to build and maintain the infrastructure that keeps the internet working.
                             </p>
                             <p className="text-lg leading-relaxed mb-4">
-                                My experience lies mostly in the frontend space, where I spend my time making it easy and enjoyable 
-                                for users to interact with complex concepts, and enabling my team to turn their intentions into concrete 
-                                data and changes in our systems. I care deeply about doing things the right way, from having high standards 
-                                for code quality to treating my teammates with the dignity and respect they deserve. I make use of AI in my 
-                                workflow now, and I treat it as an eager junior engineer who has a lot of knowledge, but very little experience 
-                                in the real world (and who can type blisteringly fast). My relationship with AI is evolving every day, and I am 
+                                My experience lies mostly in the frontend space, where I spend my time making it easy and enjoyable
+                                for users to interact with complex concepts, and enabling my team to turn user intentions into concrete
+                                data and changes in our systems. I care deeply about doing things the right way, from having high standards
+                                for code quality to treating my teammates with the dignity and respect they deserve. I make use of AI in my
+                                workflow now, and I treat it as an eager junior engineer who has a lot of knowledge, but very little experience
+                                in the real world (and who can type blisteringly fast). My relationship with AI is evolving every day, and I am
                                 really [cautiously] excited to see how the job of software engineering evolves because of it.
                             </p>
                             <p className="text-lg leading-relaxed">
-                                In my free time, I spend time with my fiancé and cats and friends, read, game, play guitar, and tinker with 
-                                all things tech. I am currently spending much of my time outside of work developing an open source game engine 
+                                In my free time, I spend time with my fiancé and cats and friends, read, game, play guitar, and tinker with
+                                all things tech. I am currently spending much of my time outside of work developing an open source game engine
                                 for interactive fiction games with built in NLP capabilities; you can check it out at{' '}
                                 <Link href="https://allegoryjs.com" className="underline hover:no-underline">
                                     https://allegoryjs.com
