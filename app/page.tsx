@@ -24,11 +24,12 @@ export default function Home() {
     return (
         <main className="min-h-screen bg-[#e5e5e5] text-[#2d2d2d] dark:bg-[#2d2d2d] dark:text-white font-mono">
             <div className="max-w-[1200px] mx-auto px-6 py-12 md:py-16">
-                {/* Mobile: Contact at top, Desktop: Contact on right */}
+                {/* Mobile: Contact at top, then bio, then projects; Desktop: Bio left, Contact+Projects right */}
                 <div className="flex flex-col md:flex-row md:gap-8">
-                    {/* Contact Section - Shows first on mobile, right side on desktop */}
-                    <aside className="md:order-2 md:w-[300px] md:flex-shrink-0 mb-12 md:mb-0">
-                        <section className="border-t-2 md:border-t-0 border-current pt-8 md:pt-0 md:sticky md:top-8 md:max-h-screen md:overflow-y-auto">
+                    {/* Right Sidebar - Contact & Projects - Shows first on mobile (Contact only), right side on desktop */}
+                    <aside className="md:order-2 md:w-[300px] md:flex-shrink-0">
+                        {/* Contact Section */}
+                        <section className="border-t-2 md:border-t-0 border-current pt-8 md:pt-0 mb-12 md:mb-8">
                             <h2 className="text-2xl font-bold mb-4">Contact</h2>
                             <ul className="space-y-2">
                                 <li className="flex items-center gap-3">
@@ -51,11 +52,38 @@ export default function Home() {
                                 </li>
                             </ul>
                         </section>
+
+                        {/* Projects Section - Shows last on mobile, in right sidebar on desktop */}
+                        <section className="border-t-2 border-current pt-8 md:order-3">
+                            <h2 className="text-2xl font-bold mb-4">Projects</h2>
+                            <ul className="space-y-6">
+                                <li>
+                                    <Link href="https://allegoryjs.com" className="text-xl underline hover:no-underline font-bold">
+                                        allegory.js
+                                    </Link>
+                                    <p className="mt-1">An open source web based interactive fiction game engine</p>
+                                </li>
+                                <li>
+                                    <Link href="/val/en" className="text-xl underline hover:no-underline font-bold">
+                                        Val
+                                    </Link>
+                                    <span className="ml-2 text-sm">(work in progress)</span>
+                                    <p className="mt-1">A website dedicated to my father</p>
+                                </li>
+                                <li>
+                                    <span className="text-xl font-bold text-[#808080] dark:text-[#999999]">
+                                        Kim
+                                    </span>
+                                    <span className="ml-2 text-sm">(coming soon)</span>
+                                    <p className="mt-1">A website dedicated to my mother</p>
+                                </li>
+                            </ul>
+                        </section>
                     </aside>
 
-                    {/* Main Content - Shows second on mobile, left side on desktop */}
+                    {/* Main Content - Bio - Shows between contact and projects on mobile, left side on desktop */}
                     <div className="md:order-1 md:flex-1">
-                        <section className="mb-12">
+                        <section>
                             <p className="text-lg leading-relaxed mb-4">
                                 Hi! I&apos;m Ezra. I&apos;m a Philadelphia-based technologist who&apos;s been tinkering, building, breaking, 
                                 and creating with computers since childhood. I am currently a Senior Software Engineer at{' '}
@@ -80,32 +108,6 @@ export default function Home() {
                                     https://allegoryjs.com
                                 </Link>
                             </p>
-                        </section>
-
-                        <section className="border-t-2 border-current pt-8">
-                            <h2 className="text-2xl font-bold mb-4">Projects</h2>
-                            <ul className="space-y-6">
-                                <li>
-                                    <Link href="https://allegoryjs.com" className="text-xl underline hover:no-underline font-bold">
-                                        allegory.js
-                                    </Link>
-                                    <p className="mt-1">An open source web based interactive fiction game engine</p>
-                                </li>
-                                <li>
-                                    <Link href="/val/en" className="text-xl underline hover:no-underline font-bold">
-                                        Val
-                                    </Link>
-                                    <span className="ml-2 text-sm">(work in progress)</span>
-                                    <p className="mt-1">A website dedicated to my father</p>
-                                </li>
-                                <li>
-                                    <span className="text-xl font-bold text-[#808080] dark:text-[#999999]">
-                                        Kim
-                                    </span>
-                                    <span className="ml-2 text-sm">(coming soon)</span>
-                                    <p className="mt-1">A website dedicated to my mother</p>
-                                </li>
-                            </ul>
                         </section>
                     </div>
                 </div>

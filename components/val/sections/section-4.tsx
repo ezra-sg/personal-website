@@ -12,29 +12,41 @@ export default function SectionFour() {
             <div className="m-auto max-w-[1000px]">
                 <h2 className="text-3xl font-header mb-4 dark:text-white">Part IV: Dr. Val</h2>
 
-                <ReactMarkdown className={`${paragraphClasses}`}>
-                    {t('val.section_4.paragraph_1_md')}
-                </ReactMarkdown>
+                <div className={`${paragraphClasses}`}>
+                    <ReactMarkdown>
+                        {t('val.section_4.paragraph_1_md')}
+                    </ReactMarkdown>
+                </div>
 
-                <ReactMarkdown className={`${paragraphClasses} first-letter:ml-8`}>
-                    {t('val.section_4.paragraph_2_md')}
-                </ReactMarkdown>
+                <div className={`${paragraphClasses} first-letter:ml-8`}>
+                    <ReactMarkdown>
+                        {t('val.section_4.paragraph_2_md')}
+                    </ReactMarkdown>
+                </div>
 
-                <ReactMarkdown className={`${paragraphClasses} first-letter:ml-8`}>
-                    {t('val.section_4.paragraph_3_md')}
-                </ReactMarkdown>
+                <div className={`${paragraphClasses} first-letter:ml-8`}>
+                    <ReactMarkdown>
+                        {t('val.section_4.paragraph_3_md')}
+                    </ReactMarkdown>
+                </div>
 
-                <ReactMarkdown className={`${paragraphClasses} first-letter:ml-8`}>
-                    {t('val.section_4.paragraph_4_md')}
-                </ReactMarkdown>
+                <div className={`${paragraphClasses} first-letter:ml-8`}>
+                    <ReactMarkdown>
+                        {t('val.section_4.paragraph_4_md')}
+                    </ReactMarkdown>
+                </div>
 
-                <ReactMarkdown className={`${paragraphClasses} first-letter:ml-8`}>
-                    {t('val.section_4.paragraph_5_md')}
-                </ReactMarkdown>
+                <div className={`${paragraphClasses} first-letter:ml-8`}>
+                    <ReactMarkdown>
+                        {t('val.section_4.paragraph_5_md')}
+                    </ReactMarkdown>
+                </div>
 
-                <ReactMarkdown className={`${paragraphClasses} first-letter:ml-8`}>
-                    {t('val.section_4.paragraph_6_md')}
-                </ReactMarkdown>
+                <div className={`${paragraphClasses} first-letter:ml-8`}>
+                    <ReactMarkdown>
+                        {t('val.section_4.paragraph_6_md')}
+                    </ReactMarkdown>
+                </div>
             </div>
         </div>
     );
