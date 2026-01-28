@@ -24,64 +24,38 @@ export default function Home() {
     return (
         <main className="min-h-screen bg-[#e5e5e5] text-[#2d2d2d] dark:bg-[#2d2d2d] dark:text-white font-mono">
             <div className="max-w-[1200px] mx-auto px-6 py-12 md:py-16">
-                {/* Mobile: Contact at top, then bio, then projects; Desktop: Bio left, Contact+Projects right */}
+                {/* Desktop: Bio left, Contact+Projects right sidebar */}
+                {/* Mobile: Contact, hr, Bio, hr, Projects */}
                 <div className="flex flex-col md:flex-row md:gap-8">
-                    {/* Right Sidebar - Contact & Projects - Shows first on mobile (Contact only), right side on desktop */}
-                    <aside className="md:order-2 md:w-[300px] md:flex-shrink-0">
-                        {/* Contact Section */}
-                        <section className="border-t-2 md:border-t-0 border-current pt-8 md:pt-0 mb-12 md:mb-8">
-                            <h2 className="text-2xl font-bold mb-4">Contact</h2>
-                            <ul className="space-y-2">
-                                <li className="flex items-center gap-3">
-                                    <MdEmail className="text-xl" />
-                                    <Link href="mailto:hello@ezra-sg.com" className="underline hover:no-underline">
-                                        hello@ezra-sg.com
-                                    </Link>
-                                </li>
-                                <li className="flex items-center gap-3">
-                                    <BsLinkedin className="text-xl" />
-                                    <Link href="https://www.linkedin.com/in/ezra-sg" className="underline hover:no-underline">
-                                        linkedin.com/in/ezra-sg
-                                    </Link>
-                                </li>
-                                <li className="flex items-center gap-3">
-                                    <BsGithub className="text-xl" />
-                                    <Link href="https://github.com/ezra-sg" className="underline hover:no-underline">
-                                        github.com/ezra-sg
-                                    </Link>
-                                </li>
-                            </ul>
-                        </section>
+                    {/* Contact Section - Shows first on mobile and desktop right sidebar */}
+                    <section className="md:order-2 md:w-[300px] md:flex-shrink-0 mb-0 md:mb-8">
+                        <h2 className="text-2xl font-bold mb-4">Contact</h2>
+                        <ul className="space-y-2">
+                            <li className="flex items-center gap-3">
+                                <MdEmail className="text-xl" />
+                                <Link href="mailto:hello@ezra-sg.com" className="underline hover:no-underline">
+                                    hello@ezra-sg.com
+                                </Link>
+                            </li>
+                            <li className="flex items-center gap-3">
+                                <BsLinkedin className="text-xl" />
+                                <Link href="https://www.linkedin.com/in/ezra-sg" className="underline hover:no-underline">
+                                    linkedin.com/in/ezra-sg
+                                </Link>
+                            </li>
+                            <li className="flex items-center gap-3">
+                                <BsGithub className="text-xl" />
+                                <Link href="https://github.com/ezra-sg" className="underline hover:no-underline">
+                                    github.com/ezra-sg
+                                </Link>
+                            </li>
+                        </ul>
+                    </section>
 
-                        {/* Projects Section - Shows last on mobile, in right sidebar on desktop */}
-                        <section className="border-t-2 border-current pt-8 md:order-3">
-                            <h2 className="text-2xl font-bold mb-4">Projects</h2>
-                            <ul className="space-y-6">
-                                <li>
-                                    <Link href="https://allegoryjs.com" className="text-xl underline hover:no-underline font-bold">
-                                        allegory.js
-                                    </Link>
-                                    <p className="mt-1">An open source web based interactive fiction game engine</p>
-                                </li>
-                                <li>
-                                    <Link href="/val/en" className="text-xl underline hover:no-underline font-bold">
-                                        Val
-                                    </Link>
-                                    <span className="ml-2 text-sm">(work in progress)</span>
-                                    <p className="mt-1">A website dedicated to my father</p>
-                                </li>
-                                <li>
-                                    <span className="text-xl font-bold text-[#808080] dark:text-[#999999]">
-                                        Kim
-                                    </span>
-                                    <span className="ml-2 text-sm">(coming soon)</span>
-                                    <p className="mt-1">A website dedicated to my mother</p>
-                                </li>
-                            </ul>
-                        </section>
-                    </aside>
+                    {/* Horizontal rule after Contact on mobile only */}
+                    <hr className="border-t-2 border-current my-8 md:hidden" />
 
-                    {/* Main Content - Bio - Shows between contact and projects on mobile, left side on desktop */}
+                    {/* Main Content - Bio - Shows after Contact on mobile, left side on desktop */}
                     <div className="md:order-1 md:flex-1">
                         <section>
                             <p className="text-lg leading-relaxed mb-4">
@@ -110,6 +84,36 @@ export default function Home() {
                             </p>
                         </section>
                     </div>
+
+                    {/* Horizontal rule before Projects on mobile only */}
+                    <hr className="border-t-2 border-current my-8 md:hidden" />
+
+                    {/* Projects Section - Shows last on mobile, in right sidebar on desktop */}
+                    <section className="md:order-3 md:w-[300px] md:flex-shrink-0 md:border-t-2 md:border-current md:pt-8">
+                        <h2 className="text-2xl font-bold mb-4">Projects</h2>
+                        <ul className="space-y-6">
+                            <li>
+                                <Link href="https://allegoryjs.com" className="text-xl underline hover:no-underline font-bold">
+                                    allegory.js
+                                </Link>
+                                <p className="mt-1">An open source web based interactive fiction game engine</p>
+                            </li>
+                            <li>
+                                <Link href="/val/en" className="text-xl underline hover:no-underline font-bold">
+                                    Val
+                                </Link>
+                                <span className="ml-2 text-sm">(work in progress)</span>
+                                <p className="mt-1">A website dedicated to my father</p>
+                            </li>
+                            <li>
+                                <span className="text-xl font-bold text-[#808080] dark:text-[#999999]">
+                                    Kim
+                                </span>
+                                <span className="ml-2 text-sm">(coming soon)</span>
+                                <p className="mt-1">A website dedicated to my mother</p>
+                            </li>
+                        </ul>
+                    </section>
                 </div>
             </div>
         </main>
