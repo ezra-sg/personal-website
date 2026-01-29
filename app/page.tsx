@@ -75,7 +75,7 @@ export default function Home() {
                                 really [cautiously] excited to see how the job of software engineering evolves because of it.
                             </p>
                             <p className="text-lg leading-relaxed">
-                                In my free time, I spend time with my fiancé and cats and friends, read, game, play guitar, and tinker with
+                                In my free time, I spend time with my fiancée and cats and friends, read, game, play guitar, and tinker with
                                 all things tech. I am currently spending much of my time outside of work developing an open source game engine
                                 for interactive fiction games with built in NLP capabilities; you can check it out at{' '}
                                 <Link href="https://allegoryjs.com" className="underline hover:no-underline">
