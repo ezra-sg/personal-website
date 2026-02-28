@@ -71,7 +71,7 @@ export default function Home() {
                                 data and changes in our systems. I care deeply about doing things the right way, from having high standards
                                 for code quality to treating my teammates with the dignity and respect they deserve. I make use of AI in my
                                 workflow now, and I treat it as an eager junior engineer who has a lot of knowledge, but very little experience
-                                in the real world (and who can type blisteringly fast). My relationship with AI is evolving every day, and I am
+                                in the real world. My relationship with AI is evolving every day, and I am
                                 really [cautiously] excited to see how the job of software engineering evolves because of it.
                             </p>
                             <p className="text-lg leading-relaxed">
