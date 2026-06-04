@@ -71,7 +71,7 @@ export default function Home() {
                                 data and changes in our systems. I care deeply about doing things the right way, from having high standards
                                 for code quality to treating my teammates with the dignity and respect they deserve. Like all techies, I 
                                 am learning to live with AI as a part of daily life. At work, it&apos;s something I use very extensively.
-                                My workflow is constantly evolving as the tooling improves&emdash;I don&apos;t write much code by hand now, instead
+                                My workflow is constantly evolving as the tooling improves&mdash;I don&apos;t write much code by hand now, instead
                                 spending my time architecting solutions, orchestrating agents, and reviewing generated code. In my personal life, 
                                 where productivity isn&apos;t so important, I use AI mostly to learn and ideate, and I still (mostly) write my own code.
                             </p>
