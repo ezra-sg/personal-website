@@ -61,7 +61,7 @@ export default function Home() {
                             <p className="text-lg leading-relaxed mb-4">
                                 Hi! I&apos;m Ezra. I&apos;m a Philadelphia-based technologist who&apos;s been tinkering, building, breaking,
                                 and creating with computers since childhood. I am currently a Senior Software Engineer at{' '}
-                                <Link href="https://tucows.com" className="underline hover:no-underline">
+                                <Link href="https://tucows.com" className="underline hover:no-underline" rel="noreferrer noopener">
                                     Tucows
                                 </Link>, helping to build and maintain the infrastructure that keeps the internet working.
                             </p>
@@ -69,15 +69,16 @@ export default function Home() {
                                 My experience lies mostly in the frontend space, where I spend my time making it easy and enjoyable
                                 for users to interact with complex concepts, and enabling my team to turn user intentions into concrete
                                 data and changes in our systems. I care deeply about doing things the right way, from having high standards
-                                for code quality to treating my teammates with the dignity and respect they deserve. I make use of AI in my
-                                workflow now, and I treat it as an eager junior engineer who has a lot of knowledge, but very little experience
-                                in the real world. My relationship with AI is evolving every day, and I am
-                                really [cautiously] excited to see how the job of software engineering evolves because of it.
+                                for code quality to treating my teammates with the dignity and respect they deserve. Like all techies, I 
+                                am learning to live with AI as a part of daily life. At work, it&apos;s something I use very extensively.
+                                My workflow is constantly evolving as the tooling improves&emdash;I don&apos;t write much code by hand now, instead
+                                spending my time architecting solutions, orchestrating agents, and reviewing generated code. In my personal life, 
+                                where productivity isn&apos;t so important, I use AI mostly to learn and ideate, and I still (mostly) write my own code.
                             </p>
                             <p className="text-lg leading-relaxed">
-                                In my free time, I spend time with my fiancée and cats and friends, read, game, play guitar, and tinker with
-                                all things tech. I am currently spending much of my time outside of work developing an open source game engine
-                                for interactive fiction games with built in NLP capabilities; you can check it out at{' '}
+                                In my free time, I hang out with my fiancée and cats and friends, read, game, play guitar, and tinker with
+                                all things tech. Outside of work, I am developing an open source game engine
+                                for interactive fiction games with built-in NLP capabilities; you can check it out at{' '}
                                 <Link href="https://allegoryjs.com" className="underline hover:no-underline">
                                     https://allegoryjs.com
                                 </Link>
